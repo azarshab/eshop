@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title><ui:insert name="title" /></title>
+        <ui:insert name="head" />
+        <f:facet name="first">
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta http-equiv="pragma" content="no-cache" />
+            <meta http-equiv="cache-control" content="no-cache" />
+            <meta http-equiv="expires" content="0" />
+        </f:facet>
+        <f:facet name="last">
+            <h:outputStylesheet  name="css/main.css" />
+        </f:facet>
+    </h:head>
+    <h:body>
+        <f:view contentType="text/html">
+            <div class="ui-fluid" style="direction: rtl">
+                <div class="ui-g">
+
+                    <div class="ui-g-12 header">
+                        <h:form>
+                            <div class="ui-g">
+                                <div class="ui-g-6">
+                                    <p:panelGrid columns="4" columnClasses="ui-grid-col-2,ui-grid-col-1,ui-grid-col-2,ui-grid-col-7" layout="grid" styleClass="ui-panelgrid-blank">
+                                        <h:link outcome="/faces/home" id="home" value="صفحه اصلی"/>
+                                        <h:link outcome="/faces/login" id="login" rendered="true" value="ورود"/>   
+                                        <h:commandLink style="font-family: tahoma;" rendered="false" action="#{singUpController.logout()}" value="خروج"/>
+                                        <h:link outcome="/faces/singUp" id="signup"  rendered="true" value="ثبت نام"/> 
+                                        <p:outputLabel style="font-family: tahoma;" value="خوش آمدید" rendered="false" />
+                                        <p:inputText  placeholder="Search"/>                                        
+                                    </p:panelGrid>                                   
+                                </div>
+                                <div class="ui-g-6" style="direction: ltr;" >
+                                    <p:graphicImage height="50" library="images" name="logo.png"/>                              
+                                </div>
+                            </div>
+                        </h:form> 
+                    </div>
+
+                    <div class="ui-g-12 top-bar">
+                        <ui:insert name="top-menu">
+                        </ui:insert>            
+                    </div>
+
+                    <div class="ui-g-12 ui-md-2">
+                        <h:form>
+                            <p:accordionPanel style="margin-top:20px">
+                                <p:tab title="Menu Item 1">
+                                    <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-panelgrid-blank">
+                                        <p:graphicImage library="images" name="gf.jpg"/>
+                                        <h:commandLink action="#{singUpController.logout()}" value="خروج"/>
+                                    </p:panelGrid>
+                                </p:tab>
+                                <p:tab title="Menu Item 2">
+                                    <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-panelgrid-blank">
+                                        <p:graphicImage library="images" name="gf.jpg"/>
+                                        <h:commandLink action="#{singUpController.logout()}" value="خروج"/>
+                                    </p:panelGrid>
+                                </p:tab>
+                                <p:tab title="Menu Item 3">
+                                    <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-panelgrid-blank">
+                                        <p:graphicImage library="images" name="gf.jpg"/>
+                                        <h:commandLink action="#{singUpController.logout()}" value="خروج"/>
+                                    </p:panelGrid>
+                                </p:tab>
+                            </p:accordionPanel>
+                        </h:form>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-10 ui-g-nopad">
+                        <div class="ui-g-12 ui-g-nopad">
+                            <div class="ui-g">
+                                <div class="ui-g-12 ui-md-12">
+                                    <ui:insert name="content">
+                                    </ui:insert> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="ui-g-12 footer">      
+                        استفاده از مطالب این سایت فقط برای مقاصد غیر تجاری و با ذکر منبع بلامانع است. <br/>
+                        Copyright © 2006 - 2016 k1.com
+                    </div>
+                </div> 
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+            </div>
+
+        </f:view>
+
+        <p:ajaxStatus onstart="PF('statusDialogw').show();" 
+                      onsuccess="PF('statusDialogw').hide();" />
+        <p:dialog appendTo="@(body)" modal="fasle" widgetVar="statusDialogw"  draggable="false" showHeader="false" 
+                  resizable="false"
+                  closable="false">      
+            <h:panelGrid id="blockContentW" columns="2">
+                <p:graphicImage library="images" value="ajax_loader_blue_48.gif" style="margin-right:12px; vertical-align:middle;" />
+                <h:outputText value="لطفا صبر کنید ..."
+                              style="white-space:nowrap;"/>
+            </h:panelGrid>
+
+        </p:dialog>
+    </h:body>
+</html>
+
+
+
+
+
+

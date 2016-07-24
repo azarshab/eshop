@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>ویرایش اطلاعات کاربری </title>
+            </f:facet>
+            <h:outputStylesheet library="css" name="login.css"/>
+        </h:head>
+
+        <h:body>        
+            <div class="content">
+                <h:form id="UserEditForm">
+                    <h:panelGroup id="display"  >                         
+                        <p:outputLabel  value="نام    " for="firstName" />
+                        <p:inputText  id="firstName" value="#{singUpController.firstName}"/><br/>
+                        <p:outputLabel  value="نام خانوادگی   " for="lastName" />
+                        <p:inputText  id="lastName"  value="#{singUpController.lastName}"/><br/>
+                        <p:outputLabel  value="نام کاربری   " for="lblUserName" />
+                        <p:inputText  id="lblUserName" value="#{singUpController.username}"/><br/>
+                        <p:outputLabel  value="رمز عبور   " for="txtPassword" />
+                        <p:inputText  id="txtPassword" type="password"  value="#{singUpController.password}"/><br/>
+                        <p:outputLabel  value="شماره ملی    " for="shomareMelli" />
+                        <p:inputText  id="shomareMelli" value="#{singUpController.shomareMelli}"/><br/>
+                        <p:outputLabel  value="ایمیل   " for="email" />
+                        <p:inputText  id="email"  value="#{singUpController.email}"/><br/>
+                        <p:outputLabel  value="شماره تماس    " for="tel" />
+                        <p:inputText  id="tel" value="#{singUpController.tel}"/><br/>
+                        <p:outputLabel  value="آدرس   " for="address" />
+                        <p:inputText  id="address"  value="#{singUpController.address}"/><br/>
+                        <p:commandButton action="#{singUpController.editUser()}" value="ویرایش"/>  <br/>
+                    </h:panelGroup>
+                </h:form>                   
+            </div>
+        </h:body>
+    </f:view>
+</html>
+
+
