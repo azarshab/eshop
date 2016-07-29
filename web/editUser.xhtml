@@ -1,46 +1,61 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-
-    <f:view contentType="text/html">
-
-        <h:head>
-            <f:facet name="first">
-                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>ویرایش اطلاعات کاربری </title>
-            </f:facet>
-            <h:outputStylesheet library="css" name="login.css"/>
-        </h:head>
-
-        <h:body>        
-            <div class="content">
-                <h:form id="UserEditForm">
-                    <h:panelGroup id="display"  >                         
-                        <p:outputLabel  value="نام    " for="firstName" />
-                        <p:inputText  id="firstName" value="#{singUpController.firstName}"/><br/>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>صفحه اصلی</title>
+    </h:head>
+    <h:body>
+        <div class="ui-fluid">
+            <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+                <ui:define name="title">
+                    ویرایش اطلاعات کاربری
+                </ui:define>
+                <ui:define name="top-menu">  
+                    top-menu
+                </ui:define>
+                <ui:define name="content">   
+                    <h:form id="loginForm">
+                        <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
+                              <p:outputLabel  value="نام    " for="firstName" />
+                        <p:inputText  id="firstName" value="#{singUpController.firstName}"/>
                         <p:outputLabel  value="نام خانوادگی   " for="lastName" />
-                        <p:inputText  id="lastName"  value="#{singUpController.lastName}"/><br/>
+                        <p:inputText  id="lastName"  value="#{singUpController.lastName}"/>
                         <p:outputLabel  value="نام کاربری   " for="lblUserName" />
-                        <p:inputText  id="lblUserName" value="#{singUpController.username}"/><br/>
+                        <p:inputText  id="lblUserName" value="#{singUpController.username}"/>
                         <p:outputLabel  value="رمز عبور   " for="txtPassword" />
-                        <p:inputText  id="txtPassword" type="password"  value="#{singUpController.password}"/><br/>
+                        <p:inputText  id="txtPassword" type="password"  value="#{singUpController.password}"/>
                         <p:outputLabel  value="شماره ملی    " for="shomareMelli" />
-                        <p:inputText  id="shomareMelli" value="#{singUpController.shomareMelli}"/><br/>
+                        <p:inputText  id="shomareMelli" value="#{singUpController.shomareMelli}"/>
                         <p:outputLabel  value="ایمیل   " for="email" />
-                        <p:inputText  id="email"  value="#{singUpController.email}"/><br/>
+                        <p:inputText  id="email"  value="#{singUpController.email}"/>
                         <p:outputLabel  value="شماره تماس    " for="tel" />
-                        <p:inputText  id="tel" value="#{singUpController.tel}"/><br/>
+                        <p:inputText  id="tel" value="#{singUpController.tel}"/>
                         <p:outputLabel  value="آدرس   " for="address" />
-                        <p:inputText  id="address"  value="#{singUpController.address}"/><br/>
-                        <p:commandButton action="#{singUpController.editUser()}" value="ویرایش"/>  <br/>
-                    </h:panelGroup>
-                </h:form>                   
-            </div>
-        </h:body>
-    </f:view>
+                        <p:inputText  id="address"  value="#{singUpController.address}"/>
+                         <p:outputLabel  />
+                        <p:commandButton id="editUserButton" action="#{singUpController.editUser()}" value="ویرایش"/>  
+                        </p:panelGrid>
+                        <p:focus for="firstName" />
+                        <p:defaultCommand target="editUserButton" />                      			
+                    </h:form>
+                </ui:define>
+            </ui:composition>   
+        </div>     
+    </h:body>
 </html>
+
+
+
+
+
+
+
+
+
+
 
 

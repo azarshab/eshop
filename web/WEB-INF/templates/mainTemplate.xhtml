@@ -64,10 +64,12 @@
                                         <h:commandLink action="#{singUpController.logout()}" value="خروج"/>
                                     </p:panelGrid>
                                 </p:tab>
-                                <p:tab title="Menu Item 3">
-                                    <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-panelgrid-blank">
+                                <p:tab title="اطلاعات کاربری">
+                                    <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-5" layout="grid" styleClass="ui-panelgrid-blank">
                                         <p:graphicImage library="images" name="gf.jpg"/>
-                                        <h:commandLink action="#{singUpController.logout()}" value="خروج"/>
+                                        <h:link outcome="editUser" value="ویرایش اطلاعات"/>
+                                        <p:graphicImage library="images" name="gf.jpg"/>
+                                        <h:link outcome="userRole" value="افزودن نقش کابری"/>
                                     </p:panelGrid>
                                 </p:tab>
                             </p:accordionPanel>
@@ -110,9 +112,3 @@
         </p:dialog>
     </h:body>
 </html>
-
-
-
-
-
-
