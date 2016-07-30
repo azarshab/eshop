@@ -39,14 +39,14 @@
 
                             <p:ajax event="cellEdit" listener="#{userRoleManagementController.onCellEdit}" update="messages" />
 
-                            <p:column headerText="Id">
+                            <p:column headerText="نام نقش">
                                 <p:cellEditor>
                                     <f:facet name="output"><h:outputText value="#{role.roleName}" /></f:facet>
                                     <f:facet name="input"><p:inputText id="modelInput" value="#{role.roleName}" style="width:96%"/></f:facet>
                                 </p:cellEditor>
                             </p:column>
 
-                            <p:column headerText="Year">
+                            <p:column headerText="مقدار نقش">
                                 <p:cellEditor>
                                     <f:facet name="output"><h:outputText value="#{role.roleValue}" /></f:facet>
                                     <f:facet name="input"><p:inputText value="#{role.roleValue}" style="width:96%" label="Year"/></f:facet>
