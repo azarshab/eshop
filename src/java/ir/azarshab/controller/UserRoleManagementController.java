@@ -10,7 +10,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import org.primefaces.event.CellEditEvent;
+import org.primefaces.event.RowEditEvent;
 
 @Named("userRoleManagementController")
 @SessionScoped
@@ -23,6 +23,7 @@ public class UserRoleManagementController implements Serializable {
     }
 
     private List<UserRole> roles;
+    private UserRole selectedRole;
 
     @PostConstruct
     public void init() {
@@ -69,14 +70,34 @@ public class UserRoleManagementController implements Serializable {
         this.roles = roles;
     }
 
-    public void onCellEdit(CellEditEvent event) {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
+    public void onRowEdit(RowEditEvent event) {
+        UserRole userRole = (UserRole) event.getObject();
+        ejbFacade.edit(userRole);
+        roles.remove(userRole);
+        roles.add(userRole);
+        FacesMessage msg = new FacesMessage("ویرایش", "اطلاعات با موفقیت ویرایش شد.");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
 
-        if (newValue != null && !newValue.equals(oldValue)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
+    public void onRowCancel(RowEditEvent event) {
+        UserRole userRole = (UserRole) event.getObject();
+        FacesMessage msg = new FacesMessage("لغو ویرایش", "اطلاعات تغییری نکرد");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public UserRole getSelectedRole() {
+        return selectedRole;
+    }
+
+    public void setSelectedRole(UserRole selectedRole) {
+        this.selectedRole = selectedRole;
+    }
+
+    public void removeUserRole(UserRole role) {
+        ejbFacade.remove(role);
+        roles.remove(role);
+        FacesMessage msg = new FacesMessage("حذف نقش کاربری", "نقش کاربری با موفقیت حذف شد.");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
 }
