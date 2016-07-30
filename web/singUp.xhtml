@@ -1,52 +1,34 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" 
-      xmlns:h="http://java.sun.com/jsf/html" 
-      xmlns:ui="http://java.sun.com/jsf/facelets" 
-      xmlns:p="http://primefaces.org/ui" 
-      xmlns:f="http://java.sun.com/jsf/core">
-    <h:head>
-        <title>صفحه اصلی</title>
-    </h:head>
-    <h:body>
-        <div class="ui-fluid">
-            <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
-                <ui:define name="title">
-                    ورود
-                </ui:define>
-                <ui:define name="top-menu">  
-                    top-menu
-                </ui:define>
-                <ui:define name="content">   
-                    <h:form id="loginForm">
-                        <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
-                            <p:outputLabel  value="نام    " for="firstName" />
-                            <p:inputText  id="firstName" value="#{singUpController.firstName}" required="true"  requiredMessage="نام  را وارد کنید"/>
-                            <p:outputLabel  value="نام خانوادگی   " for="lastName" />
-                            <p:inputText  id="lastName"  value="#{singUpController.lastName}" required="true" requiredMessage="نام خانوادگی را وارد کنید"/>
-                            <p:outputLabel  value="نام کاربری   " for="lblUserName" />
-                            <p:inputText  id="lblUserName" value="#{singUpController.username}" required="true" requiredMessage="نام کاربری را وارد کنید"/>
-                            <p:outputLabel  value="رمز عبور   " for="txtPassword" />
-                            <p:inputText  id="txtPassword" type="password"  value="#{singUpController.password}" required="true" requiredMessage="رمز عبور را وارد کنید"/>
-                            <p:outputLabel  value="شماره ملی    " for="shomareMelli" />
-                            <p:inputText  id="shomareMelli" value="#{singUpController.shomareMelli}" required="true" requiredMessage="شماره ملی را وارد کنید"/>
-                            <p:outputLabel  value="ایمیل   " for="email" />
-                            <p:inputText  id="email"  value="#{singUpController.email}" required="true" requiredMessage="ایمیل را وارد کنید"/>
-                            <p:outputLabel  value="شماره تماس    " for="tel" />
-                            <p:inputText  id="tel" value="#{singUpController.tel}" required="true" requiredMessage="تلفن را وارد کنید"/>
-                            <p:outputLabel  value="آدرس   " for="address" />
-                            <p:inputText  id="address"  value="#{singUpController.address}" required="true" requiredMessage="آدرس را وارد کنید"/>
-                            <p:outputLabel  value=""/>
-                            <p:commandButton id="singUpButton" action="#{singUpController.singUp()}" value="تایید"/>                      
-                        </p:panelGrid>
-                        <p:focus for="firstName" />
-                        <p:defaultCommand target="singUpButton" />                      			
-                    </h:form>
-                </ui:define>
-            </ui:composition>   
-        </div>     
-    </h:body>
-</html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:f="http://java.sun.com/jsf/core"  
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" template="/templates/default/main.xhtml">
+    <ui:define name="content">   
+         <h1 class="page-header "> <i class="fa fa-tachometer"></i>ثبت نام</h1>
+        <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
+            <p:outputLabel  value="نام    " for="firstName" />
+            <p:inputText  id="firstName" value="#{singUpController.firstName}" required="true"  requiredMessage="نام  را وارد کنید"/>
+            <p:outputLabel  value="نام خانوادگی   " for="lastName" />
+            <p:inputText  id="lastName"  value="#{singUpController.lastName}" required="true" requiredMessage="نام خانوادگی را وارد کنید"/>
+            <p:outputLabel  value="نام کاربری   " for="lblUserName" />
+            <p:inputText  id="lblUserName" value="#{singUpController.username}" required="true" requiredMessage="نام کاربری را وارد کنید"/>
+            <p:outputLabel  value="رمز عبور   " for="txtPassword" />
+            <p:inputText  id="txtPassword" type="password"  value="#{singUpController.password}" required="true" requiredMessage="رمز عبور را وارد کنید"/>
+            <p:outputLabel  value="شماره ملی    " for="shomareMelli" />
+            <p:inputText  id="shomareMelli" value="#{singUpController.shomareMelli}" required="true" requiredMessage="شماره ملی را وارد کنید"/>
+            <p:outputLabel  value="ایمیل   " for="email" />
+            <p:inputText  id="email"  value="#{singUpController.email}" required="true" requiredMessage="ایمیل را وارد کنید"/>
+            <p:outputLabel  value="شماره تماس    " for="tel" />
+            <p:inputText  id="tel" value="#{singUpController.tel}" required="true" requiredMessage="تلفن را وارد کنید"/>
+            <p:outputLabel  value="آدرس   " for="address" />
+            <p:inputText  id="address"  value="#{singUpController.address}" required="true" requiredMessage="آدرس را وارد کنید"/>
+            <p:outputLabel  value=""/>
+            <p:commandButton id="singUpButton" action="#{singUpController.singUp()}" value="تایید"/>                      
+        </p:panelGrid>
+        <p:focus for="firstName" />
+        <p:defaultCommand target="singUpButton" />                      			
+    </ui:define>
+</ui:composition>   
 
 
 

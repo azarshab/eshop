@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-sm-offset-9 col-md-offset-10 col-md-2 sidebar">
+                <ui:include src="rightMenu.xhtml" />
+            </div>
+            <div class="col-sm-9  col-md-10  main">   
+                <h:form id="loginForm">
+                    <ui:insert name="content" />
+                </h:form>
+            </div>
+        </div>
+    </div>
+</ui:composition>
+

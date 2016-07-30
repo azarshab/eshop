@@ -1,73 +1,42 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" 
-      xmlns:h="http://java.sun.com/jsf/html" 
-      xmlns:ui="http://java.sun.com/jsf/facelets" 
-      xmlns:p="http://primefaces.org/ui" 
-      xmlns:f="http://java.sun.com/jsf/core">
-    <h:head>
-        <title>صفحه اصلی</title>
-    </h:head>
-    <h:body>
-        <div class="ui-fluid">
-            <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
-                <ui:define name="title">
-                    افرودن نقش کاربری
-                </ui:define>
-                <ui:define name="top-menu">  
-                    top-menu
-                </ui:define>
-                <ui:define name="content">   
-                    <h:form id="roleForm">
-                        <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
-                            <p:outputLabel  value="نام نقش" for="roleName" />
-                            <p:inputText  id="roleName" value="#{userRoleManagementController.roleName}"/>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:f="http://java.sun.com/jsf/core"  
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" template="/templates/default/main.xhtml">
+    <ui:define name="content">   
+         <h1 class="page-header "> <i class="fa fa-tachometer"></i>ویرایش نقش</h1>
+        <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
+            <p:outputLabel  value="نام نقش" for="roleName" />
+            <p:inputText  id="roleName" value="#{userRoleManagementController.roleName}"/>
 
-                            <p:outputLabel  value="مقدار مقش" for="roleValue" />
-                            <p:inputText  id="roleValue"   value="#{userRoleManagementController.roleValue}"/>
+            <p:outputLabel  value="مقدار نقش" for="roleValue" />
+            <p:inputText  id="roleValue"   value="#{userRoleManagementController.roleValue}"/>
 
-                            <p:outputLabel  id="fakeLabel"  value=""/>
-                            <p:commandButton id="roleButton"  action="#{userRoleManagementController.userRoleAdd()}" value="افزودن" update="messages roleTable"/>
-                        </p:panelGrid>
-                        <p:focus for="roleName" />
-                        <p:defaultCommand target="roleButton" /> 
+            <p:outputLabel  id="fakeLabel"  value=""/>
+            <p:commandButton id="roleButton"  action="#{userRoleManagementController.userRoleAdd()}" value="افزودن" update="messages roleTable"/>
+        </p:panelGrid>
+        <p:focus for="roleName" />
+        <p:defaultCommand target="roleButton" /> 
 
 
+        <p:dataTable id="roleTable" var="role" value="#{userRoleManagementController.roles}" editable="true" editMode="cell" widgetVar="cellRoles">
+            <p:ajax event="cellEdit" listener="#{userRoleManagementController.onCellEdit}" update="messages" />
+            <p:column headerText="نام نقش">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{role.roleName}" /></f:facet>
+                    <f:facet name="input"><p:inputText id="modelInput" value="#{role.roleName}" style="width:96%"/></f:facet>
+                </p:cellEditor>
+            </p:column>
 
-
-                        <p:dataTable id="roleTable" var="role" value="#{userRoleManagementController.roles}" editable="true" editMode="cell" widgetVar="cellRoles">
-
-                            <p:ajax event="cellEdit" listener="#{userRoleManagementController.onCellEdit}" update="messages" />
-
-                            <p:column headerText="نام نقش">
-                                <p:cellEditor>
-                                    <f:facet name="output"><h:outputText value="#{role.roleName}" /></f:facet>
-                                    <f:facet name="input"><p:inputText id="modelInput" value="#{role.roleName}" style="width:96%"/></f:facet>
-                                </p:cellEditor>
-                            </p:column>
-
-                            <p:column headerText="مقدار نقش">
-                                <p:cellEditor>
-                                    <f:facet name="output"><h:outputText value="#{role.roleValue}" /></f:facet>
-                                    <f:facet name="input"><p:inputText value="#{role.roleValue}" style="width:96%" label="Year"/></f:facet>
-                                </p:cellEditor>
-                            </p:column>
-                        </p:dataTable>
-
-
-
-
-
-
-
-
-
-                    </h:form>
-                </ui:define>
-            </ui:composition>   
-        </div>     
-    </h:body>
-</html>
+            <p:column headerText="مقدار نقش">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{role.roleValue}" /></f:facet>
+                    <f:facet name="input"><p:inputText value="#{role.roleValue}" style="width:96%" label="Year"/></f:facet>
+                </p:cellEditor>
+            </p:column>
+        </p:dataTable>
+    </ui:define>
+</ui:composition>   
 
 
 

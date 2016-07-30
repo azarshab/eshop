@@ -1,34 +1,27 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-        <h:outputStylesheet name="css/jsfcrud.css"/>
-    </h:head>
-    <h:body>
-        <h:form>
-            Hello from Facelets
-            <br />
-            <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
-            <br />
-            <h:link outcome="/pages/kala/List" value="Show All Kala Items"/>
-            <br />
-            <h:link outcome="/pages/user/List" value="Show All User Items"/>
-            <br />
-            <h:link outcome="/pages/userRole/List" value="Show All UserRole Items"/>
-            <br />
-            <h:link outcome="kalaManagement" value="مدیریت کالا"/>
-            <br />
-            <h:link outcome="editUser" value="ویرایش اطلاعات"/>
-            <br />
-            <h:link outcome="deleteUser" value="حذف کاربر "/>        
-            <br />
-            <h:commandLink action="#{singUpController.logout()}" value="خروج"/>
-        </h:form>
-    </h:body>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:f="http://java.sun.com/jsf/core"  
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" template="/templates/default/main.xhtml">
+    <ui:define name="content">    
+         <h1 class="page-header "> <i class="fa fa-tachometer"></i>صفحه اصلی</h1>
+        <p:contentFlow value="#{imagesView.images}" var="image">
+            <p:graphicImage  library="images/nature" name="#{image}" styleClass="content" />
+            <div class="caption">#{image}</div>
+        </p:contentFlow>
+
+        <p:dataGrid var="img" value="#{imagesView.images}" columns="4" layout="grid"
+                    rows="12" paginator="false" style="margin-top:20px">
+            <p:panel style="text-align:center">
+                <h:panelGrid columns="1" style="width:100%">
+                    <p:graphicImage  library="images/nature" width="200" name="#{img}" styleClass="content" />
+                    <h:outputText value="Aks" />
+                </h:panelGrid>
+            </p:panel>
+        </p:dataGrid>
+    </ui:define>
+</ui:composition>       
 
 
 
-</html>
 

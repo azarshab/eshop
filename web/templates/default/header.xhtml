@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:p="http://primefaces.org/ui" >
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">برترین عکس ها</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <!--                <ul class="nav navbar-nav navbar-right">
+                                    <li><a href="#">Dashboard</a></li>
+                                    <li><a href="#">Settings</a></li>
+                                    <li><a href="#">Profile</a></li>
+                                    <li><a href="#">Help</a></li>
+                                </ul>-->
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><h:link outcome="/faces/index" id="index" value="صفحه اصلی"/></li>
+                    <li><h:link outcome="/faces/login" id="login" rendered="true" value="ورود"/> </li>
+                    <li><h:commandLink style="font-family: tahoma;" rendered="false" action="#{singUpController.logout()}" value="خروج"/></li>
+                    <li><h:link outcome="/faces/singUp" id="signup"  rendered="true" value="ثبت نام"/> </li>
+                    <li><p:outputLabel style="font-family: tahoma;" value="خوش آمدید" rendered="false" /></li>
+                </ul>
+
+                <h:form class="navbar-form navbar-right">
+                    <input type="text" class="form-control" placeholder="Search..." />
+                </h:form>
+            </div>
+        </div>
+    </div>
+</ui:composition>
+
+
+
+
+
+

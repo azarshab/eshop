@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+            <title>برترین عکس ها</title>
+        </f:facet>
+
+        <f:facet name="middle">
+            <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+
+            <h:outputStylesheet name="css/dashboard.css" />
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" />
+
+            <h:outputScript name="bootstrap/js/bootstrap.js" />
+        </f:facet>
+
+        <f:facet name="last">
+            <h:outputStylesheet name="css/font-awesome.css" />
+        </f:facet>
+
+    </h:head>
+
+    <h:body dir="rtl">
+        <ui:include src="header.xhtml" />
+        <ui:include src="content.xhtml" />
+        <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" class="col-sm-9  col-md-10  main" />
+        <p:ajaxStatus onstart="PF('statusDialogw').show();" 
+                      onsuccess="PF('statusDialogw').hide();" />
+        <p:dialog appendTo="@(body)" modal="fasle" widgetVar="statusDialogw"  draggable="false" showHeader="false" 
+                  resizable="false"
+                  closable="false">      
+            <h:panelGrid id="blockContentW" columns="2">
+                <p:graphicImage library="images" value="ajax_loader_blue_48.gif" style="margin-right:12px; vertical-align:middle;" />
+                <h:outputText value="لطفا صبر کنید ..."
+                              style="white-space:nowrap;"/>
+            </h:panelGrid>
+
+        </p:dialog>
+    </h:body>
+</html>
