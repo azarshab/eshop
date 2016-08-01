@@ -178,17 +178,13 @@ public class SingUpController implements Serializable {
         this.users = users;
     }
 
-  
-
     public String logout() {
         FacesContext context = FacesContext.getCurrentInstance();
         context.getExternalContext().getSessionMap().clear();
         return "login";
     }
 
-    
-    
-        public void onRowEditUser(RowEditEvent event) {
+    public void onRowEditUser(RowEditEvent event) {
         User user = (User) event.getObject();
         ejbFacade.edit(user);
         users.remove(user);
@@ -203,7 +199,7 @@ public class SingUpController implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
-     public void removeUserRole(User user) {
+    public void removeUserRole(User user) {
         ejbFacade.remove(user);
         users.remove(user);
         FacesMessage msg = new FacesMessage("حذف  کاربر", " کاربر با موفقیت حذف شد.");

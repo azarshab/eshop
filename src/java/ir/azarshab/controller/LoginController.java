@@ -1,5 +1,6 @@
 package ir.azarshab.controller;
 
+import ir.azarshab.model.User;
 import ir.azarshab.session_beans.UserFacade;
 
 import java.io.Serializable;
@@ -34,6 +35,12 @@ public class LoginController implements Serializable {
             showMessage("ورود نا موفق", "نام کاربری یا رمز عبور شما شتیاه میباشد", FacesMessage.SEVERITY_ERROR);
             return "login";
         }
+    }
+
+    public boolean hasUserLogin() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        User user = (User) context.getExternalContext().getSessionMap().get("user");
+        return user != null;
     }
 
     public String getUsername() {

@@ -24,7 +24,7 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li><h:link outcome="/faces/index" id="index" value="صفحه اصلی"/></li>
-                    <li><h:link outcome="/faces/login" id="login" rendered="true" value="ورود"/> </li>
+                    <li><h:link outcome="/faces/login" id="login" rendered="#{!loginController.hasUserLogin()}" value="ورود"/> </li>
                     <li>
                         <h:form>
                             <h:commandLink style="font-family: tahoma;" rendered="false" action="#{singUpController.logout()}" value="خروج"/>
