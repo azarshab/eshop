@@ -8,8 +8,8 @@
                 <li><a href="#">Analytics</a></li>
                 <li><a href="#">Export</a></li>-->
         <li class="active"><h:link outcome="editUser" rendered="#{loginController.hasUserLogin()}" value="ویرایش اطلاعات"/></li>
-        <li><h:link outcome="userRole" rendered="#{loginController.hasUserLogin()}" value="افزودن نقش کابری"/></li>
-        <li><h:link outcome="userTable" rendered="#{loginController.hasUserLogin()}" value="مدریت کاربران"/></li>
+        <li><h:link outcome="userRole" rendered="#{loginController.hasUserAdmin()}" value="افزودن نقش کابری"/></li>
+        <li><h:link outcome="userTable" rendered="#{loginController.hasUserAdmin()}" value="مدریت کاربران"/></li>
     </ul>
 
 </ui:composition>

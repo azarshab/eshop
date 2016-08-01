@@ -1,5 +1,6 @@
 package ir.azarshab.controller;
 
+import ir.azarshab.enums.Roles;
 import ir.azarshab.model.User;
 import ir.azarshab.session_beans.UserFacade;
 
@@ -41,6 +42,12 @@ public class LoginController implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         User user = (User) context.getExternalContext().getSessionMap().get("user");
         return user != null;
+    }
+
+    public boolean hasUserAdmin() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        User user = (User) context.getExternalContext().getSessionMap().get("user");
+        return hasUserLogin() && user != null && user.getUserRole() != null && user.getUserRole().getRoleValue() == Roles.MANAGER.ordinal();
     }
 
     public String getUsername() {

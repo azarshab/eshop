@@ -19,6 +19,8 @@ public class SingUpController implements Serializable {
 
     @EJB
     private ir.azarshab.session_beans.UserFacade ejbFacade;
+    @EJB
+    private ir.azarshab.session_beans.UserRoleFacade ejbFacadeUserRole;
     private String firstName;
     private String lastName;
     private String username;
@@ -54,7 +56,7 @@ public class SingUpController implements Serializable {
         user.setEmail(email);
         user.setTel(tel);
         user.setAddress(address);
-
+        user.setUserRole(ejbFacadeUserRole.getRegularUserRole());
         getFacade().create(user);
         FacesContext context = FacesContext.getCurrentInstance();
         context.getExternalContext().getSessionMap().put("user", user);
