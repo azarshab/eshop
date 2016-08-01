@@ -1,0 +1,111 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:f="http://java.sun.com/jsf/core"  
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" template="/templates/default/main.xhtml">
+    <ui:define name="content">   
+        <h1 class="page-header "> <i class="fa fa-tachometer"></i>مدیریت کاربران</h1>
+        
+        <p:dataTable id="roleTable" var="user" selection="#{singUpController.selectedUser}" value="#{singUpController.users}" editable="true" editMode="row" widgetVar="cellRoles">
+            <p:ajax event="rowEdit" listener="#{singUpController.onRowEditUser}" update="messages" />
+            <p:ajax event="rowEditCancel" listener="#{singUpController.onRowCancel}" update="messages" />
+
+            <p:column headerText="نام ">
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText value="#{user.fname}" style="width: 100%;" />
+                    </f:facet>
+                    <f:facet name="input"><p:inputText  value="#{user.fname}" style="width:96%"/></f:facet>
+                </p:cellEditor>
+            </p:column>
+
+            <p:column headerText="نام خانوادگی ">
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText style="width: 100%;" value="#{user.lname}"/>
+                    </f:facet>
+                    <f:facet name="input"><p:inputText value="#{user.lname}" style="width:96%" /></f:facet>
+                </p:cellEditor>
+            </p:column>
+            
+            <p:column headerText="نام کاربری">
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText value="#{user.username}" style="width: 100%;" />
+                    </f:facet>
+                    <f:facet name="input"><p:inputText id="modelInput" value="#{user.username}" style="width:96%"/></f:facet>
+                </p:cellEditor>
+            </p:column>
+
+            <p:column headerText="مرز عبور">
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText style="width: 100%;" value="#{user.password}"/>
+                    </f:facet>
+                    <f:facet name="input"><p:inputText value="#{user.password}" style="width:96%" label="Year"/></f:facet>
+                </p:cellEditor>
+            </p:column>
+            
+            <p:column headerText="شماره ملی ">
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText value="#{user.shomareMelli}" style="width: 100%;" />
+                    </f:facet>
+                    <f:facet name="input"><p:inputText  value="#{user.shomareMelli}" style="width:96%"/></f:facet>
+                </p:cellEditor>
+            </p:column>
+
+            <p:column headerText="ایمیل">
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText style="width: 100%;" value="#{user.email}"/>
+                    </f:facet>
+                    <f:facet name="input"><p:inputText value="#{user.email}" style="width:96%" label="Year"/></f:facet>
+                </p:cellEditor>
+            </p:column>
+            
+            <p:column headerText="شماره تماس">
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText value="#{user.tel}" style="width: 100%;" />
+                    </f:facet>
+                    <f:facet name="input"><p:inputText  value="#{user.tel}" style="width:96%"/></f:facet>
+                </p:cellEditor>
+            </p:column>
+
+            <p:column headerText="آدرس">
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText style="width: 100%;" value="#{user.address}"/>
+                    </f:facet>
+                    <f:facet name="input"><p:inputText value="#{user.address}" style="width:96%" label="Year"/></f:facet>
+                </p:cellEditor>
+            </p:column>
+
+            <p:column style="width:50px;">
+                <p:rowEditor/>
+            </p:column>
+            <p:column style="width:50px;">
+                <p:commandLink actionListener="#{singUpController.removeUserRole(user)}" value="حذف" update="messages roleTable"/>
+            </p:column>
+
+        </p:dataTable>
+    </ui:define>
+</ui:composition>   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

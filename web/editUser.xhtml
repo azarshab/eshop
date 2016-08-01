@@ -7,21 +7,21 @@
          <h1 class="page-header "> <i class="fa fa-tachometer"></i>ویرایش اطلاعات کاربری</h1>
         <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
             <p:outputLabel  value="نام    " for="firstName" />
-            <p:inputText  id="firstName" value="#{singUpController.firstName}"/>
+            <p:inputText  id="firstName" value="#{singUpController.firstName}" required="true"  requiredMessage="نام  را وارد کنید"/>
             <p:outputLabel  value="نام خانوادگی   " for="lastName" />
-            <p:inputText  id="lastName"  value="#{singUpController.lastName}"/>
+            <p:inputText  id="lastName"  value="#{singUpController.lastName}" required="true" requiredMessage="نام خانوادگی را وارد کنید"/>
             <p:outputLabel  value="نام کاربری   " for="lblUserName" />
-            <p:inputText  id="lblUserName" value="#{singUpController.username}"/>
+            <p:inputText  id="lblUserName" value="#{singUpController.username}" required="true" requiredMessage="نام کاربری را وارد کنید"/>
             <p:outputLabel  value="رمز عبور   " for="txtPassword" />
-            <p:inputText  id="txtPassword" type="password"  value="#{singUpController.password}"/>
+            <p:inputText  id="txtPassword" type="password"  value="#{singUpController.password}" required="true" requiredMessage="رمز عبور را وارد کنید"/>
             <p:outputLabel  value="شماره ملی    " for="shomareMelli" />
-            <p:inputText  id="shomareMelli" value="#{singUpController.shomareMelli}"/>
+            <p:inputText  id="shomareMelli" value="#{singUpController.shomareMelli}" required="true" requiredMessage="شماره ملی را وارد کنید"/>
             <p:outputLabel  value="ایمیل   " for="email" />
-            <p:inputText  id="email"  value="#{singUpController.email}"/>
+            <p:inputText  id="email"  value="#{singUpController.email}" required="true" requiredMessage="ایمیل را وارد کنید"/>
             <p:outputLabel  value="شماره تماس    " for="tel" />
-            <p:inputText  id="tel" value="#{singUpController.tel}"/>
+            <p:inputText  id="tel" value="#{singUpController.tel}" required="true" requiredMessage="تلفن را وارد کنید"/>
             <p:outputLabel  value="آدرس   " for="address" />
-            <p:inputText  id="address"  value="#{singUpController.address}"/>
+            <p:inputText  id="address"  value="#{singUpController.address}" required="true" requiredMessage="آدرس را وارد کنید"/>
             <p:outputLabel  />
             <p:commandButton id="editUserButton" action="#{singUpController.editUser()}" value="ویرایش"/>  
         </p:panelGrid>

@@ -4,11 +4,14 @@ import ir.azarshab.model.User;
 import ir.azarshab.session_beans.UserFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import org.primefaces.event.RowEditEvent;
 
 @Named("singUpController")
 @RequestScoped
@@ -25,12 +28,16 @@ public class SingUpController implements Serializable {
     private String tel;
     private String address;
 
+    private List<User> users;
+    private User selectedUser;
+
     public SingUpController() {
     }
 
     @PostConstruct
     public void init() {
         populateFields();
+        users = ejbFacade.findAll();
     }
 
     private UserFacade getFacade() {
@@ -155,10 +162,51 @@ public class SingUpController implements Serializable {
         this.address = address;
     }
 
+    public User getSelectedUser() {
+        return selectedUser;
+    }
+
+    public void setSelectedUser(User selectedUser) {
+        this.selectedUser = selectedUser;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+  
+
     public String logout() {
         FacesContext context = FacesContext.getCurrentInstance();
         context.getExternalContext().getSessionMap().clear();
         return "login";
     }
 
+    
+    
+        public void onRowEditUser(RowEditEvent event) {
+        User user = (User) event.getObject();
+        ejbFacade.edit(user);
+        users.remove(user);
+        users.add(user);
+        FacesMessage msg = new FacesMessage("ویرایش", "اطلاعات با موفقیت ویرایش شد.");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public void onRowCancel(RowEditEvent event) {
+        User user = (User) event.getObject();
+        FacesMessage msg = new FacesMessage("لغو ویرایش", "اطلاعات تغییری نکرد");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+     public void removeUserRole(User user) {
+        ejbFacade.remove(user);
+        users.remove(user);
+        FacesMessage msg = new FacesMessage("حذف  کاربر", " کاربر با موفقیت حذف شد.");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
 }

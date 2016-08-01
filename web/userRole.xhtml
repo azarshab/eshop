@@ -7,10 +7,10 @@
         <h1 class="page-header "> <i class="fa fa-tachometer"></i>ویرایش نقش</h1>
         <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
             <p:outputLabel  value="نام نقش" for="roleName" />
-            <p:inputText  id="roleName" value="#{userRoleManagementController.roleName}"/>
+            <p:inputText  id="roleName" value="#{userRoleManagementController.roleName}" required="true" requiredMessage="نقش کاربری را وارد کنید"/>
 
             <p:outputLabel  value="مقدار نقش" for="roleValue" />
-            <p:inputText  id="roleValue"   value="#{userRoleManagementController.roleValue}"/>
+            <p:inputText  id="roleValue"   value="#{userRoleManagementController.roleValue}" required="true" requiredMessage="مقدار نقش کاربری را وارد کنید" />
 
             <p:outputLabel  id="fakeLabel"  value=""/>
             <p:commandButton id="roleButton"  action="#{userRoleManagementController.userRoleAdd()}" value="افزودن" update="messages roleTable"/>
