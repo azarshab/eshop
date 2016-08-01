@@ -44,6 +44,11 @@ public class LoginController implements Serializable {
     }
 
     public String getUsername() {
+        if (username == null) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            User user = (User) context.getExternalContext().getSessionMap().get("user");
+            username = user == null ? "" : user.getUsername();
+        }
         return username;
     }
 
