@@ -5,7 +5,7 @@
  */
 package ir.azarshab.session_beans;
 
-import ir.azarshab.model.Kala;
+import ir.azarshab.model.Pictures;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author k1
  */
 @Stateless
-public class KalaFacade extends AbstractFacade<Kala> {
+public class PicturesFacade extends AbstractFacade<Pictures> {
 
     @PersistenceContext(unitName = "ESHOPPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class KalaFacade extends AbstractFacade<Kala> {
         return em;
     }
 
-    public KalaFacade() {
-        super(Kala.class);
+    public PicturesFacade() {
+        super(Pictures.class);
     }
     
 }

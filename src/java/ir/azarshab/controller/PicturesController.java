@@ -1,9 +1,9 @@
 package ir.azarshab.controller;
 
-import ir.azarshab.model.Kala;
+import ir.azarshab.model.Pictures;
 import ir.azarshab.controller.util.JsfUtil;
 import ir.azarshab.controller.util.JsfUtil.PersistAction;
-import ir.azarshab.session_beans.KalaFacade;
+import ir.azarshab.session_beans.PicturesFacade;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,23 +19,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("kalaController")
+@Named("picturesController")
 @SessionScoped
-public class KalaController implements Serializable {
+public class PicturesController implements Serializable {
 
     @EJB
-    private ir.azarshab.session_beans.KalaFacade ejbFacade;
-    private List<Kala> items = null;
-    private Kala selected;
+    private ir.azarshab.session_beans.PicturesFacade ejbFacade;
+    private List<Pictures> items = null;
+    private Pictures selected;
 
-    public KalaController() {
+    public PicturesController() {
     }
 
-    public Kala getSelected() {
+    public Pictures getSelected() {
         return selected;
     }
 
-    public void setSelected(Kala selected) {
+    public void setSelected(Pictures selected) {
         this.selected = selected;
     }
 
@@ -45,36 +45,36 @@ public class KalaController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private KalaFacade getFacade() {
+    private PicturesFacade getFacade() {
         return ejbFacade;
     }
 
-    public Kala prepareCreate() {
-        selected = new Kala();
+    public Pictures prepareCreate() {
+        selected = new Pictures();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("KalaCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("PicturesCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("KalaUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("PicturesUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("KalaDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("PicturesDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Kala> getItems() {
+    public List<Pictures> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -109,29 +109,29 @@ public class KalaController implements Serializable {
         }
     }
 
-    public Kala getKala(java.lang.Long id) {
+    public Pictures getPictures(java.lang.Long id) {
         return getFacade().find(id);
     }
 
-    public List<Kala> getItemsAvailableSelectMany() {
+    public List<Pictures> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<Kala> getItemsAvailableSelectOne() {
+    public List<Pictures> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Kala.class)
-    public static class KalaControllerConverter implements Converter {
+    @FacesConverter(forClass = Pictures.class)
+    public static class PicturesControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            KalaController controller = (KalaController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "kalaController");
-            return controller.getKala(getKey(value));
+            PicturesController controller = (PicturesController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "picturesController");
+            return controller.getPictures(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
@@ -151,11 +151,11 @@ public class KalaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Kala) {
-                Kala o = (Kala) object;
+            if (object instanceof Pictures) {
+                Pictures o = (Pictures) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Kala.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Pictures.class.getName()});
                 return null;
             }
         }

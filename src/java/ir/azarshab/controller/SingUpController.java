@@ -1,6 +1,7 @@
 package ir.azarshab.controller;
 
 import ir.azarshab.model.User;
+import ir.azarshab.model.UserRole;
 import ir.azarshab.session_beans.UserFacade;
 
 import java.io.Serializable;
@@ -21,6 +22,7 @@ public class SingUpController implements Serializable {
     private ir.azarshab.session_beans.UserFacade ejbFacade;
     @EJB
     private ir.azarshab.session_beans.UserRoleFacade ejbFacadeUserRole;
+
     private String firstName;
     private String lastName;
     private String username;
@@ -32,6 +34,10 @@ public class SingUpController implements Serializable {
 
     private List<User> users;
     private User selectedUser;
+    private List<UserRole> userRoles;
+
+    // this user used for add user in user manage page
+    private User addedUser = new User();
 
     public SingUpController() {
     }
@@ -40,6 +46,7 @@ public class SingUpController implements Serializable {
     public void init() {
         populateFields();
         users = ejbFacade.findAll();
+        userRoles = ejbFacadeUserRole.findAll();
     }
 
     private UserFacade getFacade() {
@@ -47,6 +54,21 @@ public class SingUpController implements Serializable {
     }
 
     public String singUp() {
+        User user = saveUser();
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getSessionMap().put("user", user);
+        return "index";
+    }
+
+    public void addUser() {
+        addedUser.setUserRole(ejbFacadeUserRole.getRegularUserRole());
+        getFacade().create(addedUser);
+        users.add(addedUser);
+        addedUser = new User();
+        showMessage("کاربر با موفقیت ثبت شد", "کاربر با موفقیت ثبت شد", FacesMessage.SEVERITY_INFO);
+    }
+
+    private User saveUser() {
         User user = new User();
         user.setFname(firstName);
         user.setLname(lastName);
@@ -58,9 +80,7 @@ public class SingUpController implements Serializable {
         user.setAddress(address);
         user.setUserRole(ejbFacadeUserRole.getRegularUserRole());
         getFacade().create(user);
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.getExternalContext().getSessionMap().put("user", user);
-        return "index";
+        return user;
     }
 
     public void populateFields() {
@@ -180,6 +200,22 @@ public class SingUpController implements Serializable {
         this.users = users;
     }
 
+    public List<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(List<UserRole> userRoles) {
+        this.userRoles = userRoles;
+    }
+
+    public User getAddedUser() {
+        return addedUser;
+    }
+
+    public void setAddedUser(User addedUser) {
+        this.addedUser = addedUser;
+    }
+
     public String logout() {
         FacesContext context = FacesContext.getCurrentInstance();
         context.getExternalContext().getSessionMap().clear();
@@ -206,5 +242,10 @@ public class SingUpController implements Serializable {
         users.remove(user);
         FacesMessage msg = new FacesMessage("حذف  کاربر", " کاربر با موفقیت حذف شد.");
         FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    private void showMessage(String titleString, String description, FacesMessage.Severity severity) {
+        FacesMessage message = new FacesMessage(severity, titleString, description);
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 }
