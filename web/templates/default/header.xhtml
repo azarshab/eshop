@@ -23,16 +23,16 @@
                                 </ul>-->
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><h:link outcome="/faces/login" id="login" rendered="#{!loginController.hasUserLogin()}" value="ورود"/> </li>
+                    <li><h:link outcome="login" id="login" rendered="#{!loginController.hasUserLogin()}" value="ورود"/> </li>
                     <li>
                         <h:form class="navbar-form navbar-right">
                             <h:commandLink style="font-family: tahoma;" rendered="#{loginController.hasUserLogin()}" action="#{singUpController.logout()}" value="خروج"/>
                         </h:form>
                     </li>
-                    <li><h:link outcome="/faces/singUp" id="signup"  rendered="#{!loginController.hasUserLogin()}" value="ثبت نام"/> </li>
-                    <li><h:link outcome="/faces/editUser" id="editUserId"  rendered="#{loginController.hasUserLogin()}" value="#{loginController.username}"/> </li>
+                    <li><h:link outcome="singUp" id="signup"  rendered="#{!loginController.hasUserLogin()}" value="ثبت نام"/> </li>
+                    <li><h:link outcome="editUser" id="editUserId"  rendered="#{loginController.hasUserLogin()}" value="#{loginController.username}"/> </li>
                     <li><h:outputText class="navbar-form navbar-right" style="font-family: tahoma;" value="خوش آمدید" rendered="#{loginController.hasUserLogin()}" /></li>
-                    <li><h:link outcome="/faces/index" id="index" value="صفحه اصلی"/></li>
+                    <li><h:link outcome="index" id="index" value="صفحه اصلی"/></li>
                 </ul>
 
                 <h:form class="navbar-form navbar-right">

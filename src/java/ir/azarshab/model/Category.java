@@ -3,6 +3,7 @@ package ir.azarshab.model;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,7 +44,7 @@ public class Category implements Serializable {
     private String catName;
     @Column(name = "cat_value")
     private Integer catValue;
-    @ManyToMany(mappedBy = "categoryList")
+    @ManyToMany(mappedBy = "categoryList", cascade = CascadeType.ALL)
     private List<Pictures> picturesList;
 
     public Category() {

@@ -58,8 +58,8 @@ public class Pictures implements Serializable {
     @Column(name = "relative_path")
     private String relativePath;
     @JoinTable(name = "pictures_category", joinColumns = {
-        @JoinColumn(name = "category_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "pictures_id", referencedColumnName = "id")})
+        @JoinColumn(name = "pictures_id", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "category_id", referencedColumnName = "id")})
     @ManyToMany
     private List<Category> categoryList;
 

@@ -4,6 +4,10 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui" template="/templates/default/main.xhtml">
     <ui:define name="content">   
+        <f:metadata>                            
+            <f:event listener="#{picturesManagementController.initPicture()}" type="preRenderView"/>
+        </f:metadata>
+
         <h1 class="page-header "> <i class="fa fa-tachometer"></i>ثبت نام</h1>
         <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
             <p:outputLabel  value="نام    " for="name" />
@@ -16,9 +20,9 @@
             <p:inputText  id="photoDate" value="#{picturesManagementController.photoDate}" required="true" requiredMessage="رمز عبور را وارد کنید"/>
             <p:outputLabel  value="آپلود عکس   " for="relativePath" />
             <p:inputText  id="relativePath" value="#{picturesManagementController.relativePath}" required="true" requiredMessage="رمز عبور را وارد کنید"/>
-           
-            <p:selectManyCheckbox id="categorys" value="#{picturesManagementController.selectedCategoryList}" layout="responsive" columns="3">
-                <f:selectItems value="#{picturesManagementController.categorys}" var="categorys" itemLabel="#{categorys.catName}" itemValue="#{categorys.id}" />
+
+            <p:selectManyCheckbox id="categorys" value="#{picturesManagementController.selectedCategoryIdsList}" layout="responsive" columns="3">
+                <f:selectItems value="#{picturesManagementController.categorys}" var="category" itemLabel="#{category.catName}" itemValue="#{category.id}" />
             </p:selectManyCheckbox>
             <p:outputLabel  value=""/>
             <p:commandButton id="singUpButton" action="#{picturesManagementController.addPictures()}" value="تایید"/>                      

@@ -7,6 +7,7 @@ import ir.azarshab.session_beans.PicturesFacade;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -30,7 +31,7 @@ public class PicturesManagementController implements Serializable {
     private String description;
     private BigInteger photoDate;
     private String relativePath;
-    private List<Category> selectedCategoryList;
+    private List<String> selectedCategoryIdsList;
 
     private List<Category> categorys;
 
@@ -45,7 +46,7 @@ public class PicturesManagementController implements Serializable {
     public List<Category> getCategorys() {
         return categorys;
     }
-    
+
     public void setCategorys(List<Category> categorys) {
         this.categorys = categorys;
     }
@@ -108,24 +109,28 @@ public class PicturesManagementController implements Serializable {
         this.relativePath = relativePath;
     }
 
-    public List<Category> getSelectedCategoryList() {
-        return selectedCategoryList;
+    public List<String> getSelectedCategoryIdsList() {
+        return selectedCategoryIdsList;
     }
 
-    public void setSelectedCategoryList(List<Category> categoryList) {
-        this.selectedCategoryList = categoryList;
+    public void setSelectedCategoryIdsList(List<String> selectedCategoryIdsList) {
+        this.selectedCategoryIdsList = selectedCategoryIdsList;
     }
 
     public String addPictures() {
-        Pictures pictures = new Pictures();
-        pictures.setName(name);
-        pictures.setTitle(title);
-        pictures.setDescription(description);
-        pictures.setPhotoDate(photoDate);
-        pictures.setRelativePath(relativePath);
-        pictures.setCategoryList(selectedCategoryList);
-        System.out.println("***************"+selectedCategoryList);
-        getFacade().create(pictures);
+        Pictures p = new Pictures();
+        p.setName(name);
+        p.setTitle(title);
+        p.setDescription(description);
+        p.setPhotoDate(photoDate);
+        p.setRelativePath(relativePath);
+        List<Category> categorysObjects = new ArrayList<>();
+        for (int i = 0; i < selectedCategoryIdsList.size(); i++) {
+            Category category = ejbFacadeCategory.find(Integer.valueOf(selectedCategoryIdsList.get(i)));
+            categorysObjects.add(category);
+        }
+        p.setCategoryList(categorysObjects);
+        getFacade().create(p);
         return "";
     }
 
