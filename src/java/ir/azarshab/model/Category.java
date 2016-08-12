@@ -43,10 +43,7 @@ public class Category implements Serializable {
     private String catName;
     @Column(name = "cat_value")
     private Integer catValue;
-    @JoinTable(name = "pictures_category", joinColumns = {
-        @JoinColumn(name = "category_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "pictures_id", referencedColumnName = "id")})
-    @ManyToMany
+    @ManyToMany(mappedBy = "categoryList")
     private List<Pictures> picturesList;
 
     public Category() {
@@ -113,5 +110,5 @@ public class Category implements Serializable {
     public String toString() {
         return "ir.azarshab.model.Category[ id=" + id + " ]";
     }
-    
+
 }

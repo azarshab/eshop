@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:f="http://java.sun.com/jsf/core"  
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" template="/templates/default/main.xhtml">
+    <ui:define name="content">   
+        <h1 class="page-header "> <i class="fa fa-tachometer"></i>ویرایش سبک</h1>
+        <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
+            <p:outputLabel  value="نام سبک" for="categoryName" />
+            <p:inputText  id="categoryName" value="#{categoryManagementController.categoryName}" required="true" requiredMessage="سبک کاربری را وارد کنید"/>
+
+            <p:outputLabel  value="مقدار سبک" for="categoryValue" />
+            <p:inputText  id="categoryValue"   value="#{categoryManagementController.categoryValue}" required="true" requiredMessage="مقدار سبک کاربری را وارد کنید" />
+
+            <p:outputLabel  id="fakeLabel"  value=""/>
+            <p:commandButton id="categoryButton"  action="#{categoryManagementController.categoryAdd()}" value="افزودن" update="messages categoryTable"/>
+        </p:panelGrid>
+        <p:focus for="categoryName" />
+        <p:defaultCommand target="categoryButton" /> 
+
+
+        <p:dataTable id="categoryTable" var="category" selection="#{categoryManagementController.selectedCategory}" value="#{categoryManagementController.categorys}" editable="true" editMode="row" widgetVar="cellCategorys">
+            <p:ajax event="rowEdit" listener="#{categoryManagementController.onRowEdit}" update="messages" />
+            <p:ajax event="rowEditCancel" listener="#{categoryManagementController.onRowCancel}" update="messages" />
+
+            <p:column headerText="نام سبک">
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText value="#{category.catName}" style="width: 100%;" />
+                    </f:facet>
+                    <f:facet name="input"><p:inputText id="modelInput" value="#{category.catName}" style="width:96%"/></f:facet>
+                </p:cellEditor>
+            </p:column>
+
+            <p:column headerText="مقدار سبک">
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText style="width: 100%;" value="#{category.catValue}"/>
+                    </f:facet>
+                    <f:facet name="input"><p:inputText value="#{category.catValue}" style="width:96%" label="Year"/></f:facet>
+                </p:cellEditor>
+            </p:column>
+
+            <p:column style="width:50px;">
+                <p:rowEditor/>
+            </p:column>
+            <p:column style="width:50px;">
+                <p:commandLink actionListener="#{categoryManagementController.removeCategory(category)}" value="حذف" update="messages categoryTable"/>
+            </p:column>
+
+        </p:dataTable>
+    </ui:define>
+</ui:composition>   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

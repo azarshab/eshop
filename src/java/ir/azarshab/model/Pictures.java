@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
@@ -55,7 +57,10 @@ public class Pictures implements Serializable {
     @Size(max = 2000)
     @Column(name = "relative_path")
     private String relativePath;
-    @ManyToMany(mappedBy = "picturesList")
+    @JoinTable(name = "pictures_category", joinColumns = {
+        @JoinColumn(name = "category_id", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "pictures_id", referencedColumnName = "id")})
+    @ManyToMany
     private List<Category> categoryList;
 
     public Pictures() {
@@ -146,5 +151,5 @@ public class Pictures implements Serializable {
     public String toString() {
         return "ir.azarshab.model.Pictures[ id=" + id + " ]";
     }
-    
+
 }
