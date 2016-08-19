@@ -151,5 +151,4 @@ public class Pictures implements Serializable {
     public String toString() {
         return "ir.azarshab.model.Pictures[ id=" + id + " ]";
     }
-
 }
