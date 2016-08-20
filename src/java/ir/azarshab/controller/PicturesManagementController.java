@@ -2,9 +2,9 @@ package ir.azarshab.controller;
 
 import ir.azarshab.model.Pictures;
 import ir.azarshab.model.Category;
-import static ir.azarshab.model.Pictures_.relativePath;
 import ir.azarshab.session_beans.CategoryFacade;
 import ir.azarshab.session_beans.PicturesFacade;
+import java.io.File;
 
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -15,7 +15,6 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
@@ -36,8 +35,9 @@ public class PicturesManagementController implements Serializable {
     private String title;
     private String description;
     private BigInteger photoDate;
-    private String relativePath;
+    private String absolutePath;
     private List<String> selectedCategoryIdsList;
+    private UploaderBB uploaderBB = new UploaderBB();
 
     private List<Category> categorys;
 
@@ -107,12 +107,12 @@ public class PicturesManagementController implements Serializable {
         this.photoDate = photoDate;
     }
 
-    public String getRelativePath() {
-        return relativePath;
+    public String getAbsolutePath() {
+        return absolutePath;
     }
 
-    public void setRelativePath(String relativePath) {
-        this.relativePath = relativePath;
+    public void setAbsolutePath(String absolutePath) {
+        this.absolutePath = absolutePath;
     }
 
     public List<String> getSelectedCategoryIdsList() {
@@ -129,7 +129,7 @@ public class PicturesManagementController implements Serializable {
         p.setTitle(title);
         p.setDescription(description);
         p.setPhotoDate(photoDate);
-        p.setRelativePath(relativePath);
+        p.setRelativePath(absolutePath);
         List<Category> categorysObjects = new ArrayList<>();
         for (int i = 0; i < selectedCategoryIdsList.size(); i++) {
             Category category = ejbFacadeCategory.find(Integer.valueOf(selectedCategoryIdsList.get(i)));
@@ -146,21 +146,11 @@ public class PicturesManagementController implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
-    private UploadedFile file;
-
-    public UploadedFile getFile() {
-        return file;
+    public void handleFileUpload(FileUploadEvent event) {
+        uploaderBB.handleFileUpload(event);
+        absolutePath = UploaderBB.PREFIX_PATH + File.separator + event.getFile().getFileName();
+        FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
-    public void setFile(UploadedFile file) {
-        this.file = file;
-    }
-
-    public void upload() {
-        if (file != null) {
-            FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
-            FacesContext.getCurrentInstance().addMessage(null, message);
-            relativePath = file.toString();
-        }
-    }
 }
