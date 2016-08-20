@@ -7,15 +7,11 @@
         <h1 class="page-header "> <i class="fa fa-tachometer"></i>مدیریت محتوا</h1>
         <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
             <p:outputLabel  value="عنوان    " for="title" />
-            <p:inputText  id="title" value="#{siteContentManagementController.title}" required="true"  requiredMessage="نام  را وارد کنید"/>
+            <p:inputText  id="title" value="#{siteContentManagementController.title}" required="true"  requiredMessage="عنوان  را وارد کنید"/>
             <p:outputLabel  value="تاریخ درج متن   " for="creationDate" />
-            <p:inputText  id="creationDate"  value="#{siteContentManagementController.creationDate}" required="true" requiredMessage="نام خانوادگی را وارد کنید"/>
+            <p:inputText  id="creationDate"  value="#{siteContentManagementController.creationDate}" required="true" requiredMessage="تاریخ درج متن را وارد کنید"/>
             <p:outputLabel  value="جای در صفحه   " for="visitCount" />
-            <p:inputText  id="visitCount" value="#{siteContentManagementController.visitCount}" required="true" requiredMessage="نام کاربری را وارد کنید"/>
-
-
-
-
+            <p:inputText  id="visitCount" value="#{siteContentManagementController.visitCount}" required="true" requiredMessage="جای در صفحه را وارد کنید"/>
             <h:form>           
                 <p:editor id="editor" widgetVar="editorWidget" value="#{siteContentManagementController.description}" width="600" />
 
@@ -29,16 +25,10 @@
                     <h:outputText id="display" value="#{siteContentManagementController.description}" escape="false" />
                 </p:dialog>
             </h:form> 
-
-
-
-
-
-
             <p:outputLabel  value=""/>
             <p:commandButton id="singUpButton" action="#{siteContentManagementController.addText()}" value="تایید"/>                      
         </p:panelGrid>
-        <p:focus for="firstName" />
+        <p:focus for="title" />
         <p:defaultCommand target="singUpButton" />                      			
     </ui:define>
 </ui:composition>   

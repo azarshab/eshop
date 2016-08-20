@@ -9,6 +9,8 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 @Named("siteContentManagementController")
 @SessionScoped
@@ -69,6 +71,8 @@ public class SiteContentManagementController implements Serializable {
         s.setCreationDate(creationDate);
         s.setVisitCount(visitCount);
         getFacade().create(s);
+        FacesMessage msg = new FacesMessage("درج متن", " متن با موفقیت درج شد.");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
         return "siteContent";
     }
 

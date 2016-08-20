@@ -160,7 +160,7 @@ public class PicturesManagementController implements Serializable {
         if (file != null) {
             FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, message);
+            relativePath = file.toString();
         }
     }
 }
-

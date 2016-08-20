@@ -19,15 +19,11 @@
             <p:outputLabel  value="زمان عکاسی   " for="photoDate" />
             <p:inputText  id="photoDate" value="#{picturesManagementController.photoDate}" required="true" requiredMessage="تاریخ عکاسی را وارد کنید"/>
 
-
-            <!--            <p:outputLabel  value="آپلود عکس   " for="relativePath" />-->
-            <!--            <p:inputText  id="relativePath" value="#{picturesManagementController.relativePath}" required="true" requiredMessage="رمز عبور را وارد کنید"/>-->
-
             <h:form enctype="multipart/form-data">
                 <p:growl id="messages" showDetail="true" />
 
-                <p:fileUpload id="relativePath" value="#{fileUploadView.file}" mode="simple" skinSimple="true"/>
-
+                <p:fileUpload id="relativePath" value="#{picturesManagementController.file}" mode="simple" skinSimple="true"/>
+                <p:commandButton id="Button" actionListener="#{picturesManagementController.upload}" value="آپلود"/>
             </h:form>
 
             <p:selectManyCheckbox id="categorys" value="#{picturesManagementController.selectedCategoryIdsList}" layout="responsive" columns="3">
