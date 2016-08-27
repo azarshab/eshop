@@ -14,13 +14,14 @@ public class ImagesView {
 
     private List<String> images;
 
-    @PostConstruct
+     @PostConstruct
     public void init() {
         images = new ArrayList<String>();
         for (int i = 0; i <= 9; i++) {
             images.add(i + ".jpg");
         }
     }
+
 
     public List<String> getImages() {
         return images;

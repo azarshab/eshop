@@ -17,7 +17,6 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
 
 @Named("picturesManagementController")
 @SessionScoped
@@ -27,6 +26,9 @@ public class PicturesManagementController implements Serializable {
     private PicturesFacade ejbFacade;
     @EJB
     private CategoryFacade ejbFacadeCategory;
+
+    private List<String> imagesContentFlow;
+    private Integer imagesContentFlowInt=5;
 
     private List<Pictures> items = null;
     private Pictures selected;
@@ -47,6 +49,10 @@ public class PicturesManagementController implements Serializable {
     @PostConstruct
     public void initPicture() {
         categorys = ejbFacadeCategory.findAll();
+        imagesContentFlow=getFacade().getPicturesByCatValue(imagesContentFlowInt);
+        System.out.println(imagesContentFlowInt);
+        System.out.println("imagesContentFlow=============>" +imagesContentFlow);
+      
     }
 
     public List<Category> getCategorys() {
@@ -123,6 +129,24 @@ public class PicturesManagementController implements Serializable {
         this.selectedCategoryIdsList = selectedCategoryIdsList;
     }
 
+    public List<String> getImagesContentFlow() {
+        return imagesContentFlow;
+    }
+
+    public void setImagesContentFlow(List<String> imagesContentFlow) {
+        this.imagesContentFlow = imagesContentFlow;
+    }
+
+    public Integer getImagesContentFlowInt() {
+        return imagesContentFlowInt;
+    }
+
+    public void setImagesContentFlowInt(Integer imagesContentFlowInt) {
+        this.imagesContentFlowInt = imagesContentFlowInt;
+    }
+
+    
+    
     public String addPictures() {
         Pictures p = new Pictures();
         p.setName(name);

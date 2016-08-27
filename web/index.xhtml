@@ -4,9 +4,22 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui" template="/templates/default/main.xhtml">
     <ui:define name="content">    
-         <h1 class="page-header "> <i class="fa fa-tachometer"></i>صفحه اصلی</h1>
-        <p:contentFlow value="#{imagesView.images}" var="image">
-            <p:graphicImage  library="images/nature" name="#{image}" styleClass="content" />
+        <h1 class="page-header "> <i class="fa fa-tachometer"></i>صفحه اصلی</h1>
+
+        <h:selectOneMenu value="#{picturesManagementController.imagesContentFlowInt}" style="width:25%">
+            <f:selectItems value="#{categoryManagementController.categorys}" var="categorys" itemLabel="#{categorys.catName}" itemValue="#{categorys.catValue}" />
+        </h:selectOneMenu>
+
+
+<!--        <p:outputLabel for="ax" value="نوع عکس برای نمایش " />
+        <p:selectOneMenu id="ax" value="#{picturesManagementController.imagesContentFlowInt}" effect="fold" editable="true">
+            <f:selectItem itemLabel="نوع عکس برای نمایش " itemValue="" />
+            <f:selectItems value="#{categoryManagementController.categorys}" var="categorys" itemLabel="#{categorys.catName}" itemValue="#{categorys.catValue}"/>
+        </p:selectOneMenu>-->
+
+
+        <p:contentFlow value="#{picturesManagementController.imagesContentFlow}" var="image">
+            <p:graphicImage  library="D:\\UPLOAD" name="#{image}" styleClass="content" />
             <div class="caption">#{image}</div>
         </p:contentFlow>
 
