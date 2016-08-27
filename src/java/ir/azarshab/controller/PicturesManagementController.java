@@ -5,11 +5,16 @@ import ir.azarshab.model.Category;
 import ir.azarshab.session_beans.CategoryFacade;
 import ir.azarshab.session_beans.PicturesFacade;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -17,6 +22,8 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 @Named("picturesManagementController")
 @SessionScoped
@@ -26,9 +33,6 @@ public class PicturesManagementController implements Serializable {
     private PicturesFacade ejbFacade;
     @EJB
     private CategoryFacade ejbFacadeCategory;
-
-    private List<String> imagesContentFlow;
-    private Integer imagesContentFlowInt=5;
 
     private List<Pictures> items = null;
     private Pictures selected;
@@ -41,7 +45,9 @@ public class PicturesManagementController implements Serializable {
     private List<String> selectedCategoryIdsList;
     private UploaderBB uploaderBB = new UploaderBB();
 
+    private Category selectedCategory;
     private List<Category> categorys;
+    private List<StreamedContent> uploadedUserImages;
 
     public PicturesManagementController() {
     }
@@ -49,10 +55,11 @@ public class PicturesManagementController implements Serializable {
     @PostConstruct
     public void initPicture() {
         categorys = ejbFacadeCategory.findAll();
-        imagesContentFlow=getFacade().getPicturesByCatValue(imagesContentFlowInt);
-        System.out.println(imagesContentFlowInt);
-        System.out.println("imagesContentFlow=============>" +imagesContentFlow);
-      
+        uploadedUserImages = new ArrayList<>();
+        if (!categorys.isEmpty()) {
+            selectedCategory = categorys.get(2);
+            filterPicturesByCategory();
+        }
     }
 
     public List<Category> getCategorys() {
@@ -129,24 +136,22 @@ public class PicturesManagementController implements Serializable {
         this.selectedCategoryIdsList = selectedCategoryIdsList;
     }
 
-    public List<String> getImagesContentFlow() {
-        return imagesContentFlow;
+    public Category getSelectedCategory() {
+        return selectedCategory;
     }
 
-    public void setImagesContentFlow(List<String> imagesContentFlow) {
-        this.imagesContentFlow = imagesContentFlow;
+    public void setSelectedCategory(Category selectedCategory) {
+        this.selectedCategory = selectedCategory;
     }
 
-    public Integer getImagesContentFlowInt() {
-        return imagesContentFlowInt;
+    public List<StreamedContent> getUploadedUserImages() {
+        return uploadedUserImages;
     }
 
-    public void setImagesContentFlowInt(Integer imagesContentFlowInt) {
-        this.imagesContentFlowInt = imagesContentFlowInt;
+    public void setUploadedUserImages(List<StreamedContent> uploadedUserImages) {
+        this.uploadedUserImages = uploadedUserImages;
     }
 
-    
-    
     public String addPictures() {
         Pictures p = new Pictures();
         p.setName(name);
@@ -175,6 +180,26 @@ public class PicturesManagementController implements Serializable {
         absolutePath = UploaderBB.PREFIX_PATH + File.separator + event.getFile().getFileName();
         FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
         FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    public void filterPicturesByCategory() {
+        uploadedUserImages.clear();
+        List<Pictures> pictures = getFacade().getPicturesByCatValue(2);
+        for (int i = 0; i < pictures.size(); i++) {
+            FileInputStream input = null;
+            try {
+                input = new FileInputStream(new File(pictures.get(i).getRelativePath()));
+                uploadedUserImages.add(new DefaultStreamedContent(input, "image/jpeg"));
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(PicturesManagementController.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            } finally {
+                try {
+                    input.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(PicturesManagementController.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+                }
+            }
+        }
     }
 
 }

@@ -6,32 +6,31 @@
     <ui:define name="content">    
         <h1 class="page-header "> <i class="fa fa-tachometer"></i>صفحه اصلی</h1>
 
-        <h:selectOneMenu value="#{picturesManagementController.imagesContentFlowInt}" style="width:25%">
-            <f:selectItems value="#{categoryManagementController.categorys}" var="categorys" itemLabel="#{categorys.catName}" itemValue="#{categorys.catValue}" />
-        </h:selectOneMenu>
 
+        <p:outputLabel for="ax" value="نوع عکس برای نمایش " />
+        <p:selectOneMenu id="ax" value="#{picturesManagementController.selectedCategory}" effect="fold" editable="true">
+            <f:selectItem itemLabel="نوع عکس برای نمایش " itemValue="" noSelectionOption="true"/>
+            <p:ajax listener="#{picturesManagementController.filterPicturesByCategory()}" update="cf"/>
+            <f:selectItems var="cat" value="#{categoryManagementController.categorys}" itemValue="#{cat.catValue}" itemLabel="#{cat.catName}"/>
+        </p:selectOneMenu>
 
-<!--        <p:outputLabel for="ax" value="نوع عکس برای نمایش " />
-        <p:selectOneMenu id="ax" value="#{picturesManagementController.imagesContentFlowInt}" effect="fold" editable="true">
-            <f:selectItem itemLabel="نوع عکس برای نمایش " itemValue="" />
-            <f:selectItems value="#{categoryManagementController.categorys}" var="categorys" itemLabel="#{categorys.catName}" itemValue="#{categorys.catValue}"/>
-        </p:selectOneMenu>-->
-
-
-        <p:contentFlow value="#{picturesManagementController.imagesContentFlow}" var="image">
-            <p:graphicImage  library="D:\\UPLOAD" name="#{image}" styleClass="content" />
+        <p:contentFlow id="cf" value="#{picturesManagementController.uploadedUserImages}" var="image">
+            <p:graphicImage  value="#{image}" styleClass="content" />
             <div class="caption">#{image}</div>
         </p:contentFlow>
 
-        <p:dataGrid var="img" value="#{imagesView.images}" columns="4" layout="grid"
+        <p:dataGrid var="img" value="#{picturesManagementController.uploadedUserImages}" columns="4" layout="grid"
                     rows="12" paginator="false" style="margin-top:20px">
             <p:panel style="text-align:center">
                 <h:panelGrid columns="1" style="width:100%">
-                    <p:graphicImage  library="images/nature" width="200" name="#{img}" styleClass="content" />
+                    <p:graphicImage  width="200" value="#{img}" styleClass="content" />
                     <h:outputText value="Aks" />
                 </h:panelGrid>
             </p:panel>
         </p:dataGrid>
+
+
+
     </ui:define>
 </ui:composition>       
 

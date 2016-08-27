@@ -32,19 +32,12 @@ public class PicturesFacade extends AbstractFacade<Pictures> {
         super(Pictures.class);
     }
 
-//    public List<Pictures> getPicturesByCatValue(Integer catValue) {
-//        Query query = em.createQuery(
-//                "SELECT p FROM Pictures p INNER JOIN p.categoryList c WHERE c.catValue= :catValue");
-//        query.setParameter("catValue", catValue);
-//        List<Pictures> results = query.getResultList();
-//        return results;
-//    }
-
-    public List<String> getPicturesByCatValue(Integer catValue) {
+    public List<Pictures> getPicturesByCatValue(Integer catValue) {
         Query query = em.createQuery(
-                "SELECT p.name FROM Pictures p INNER JOIN p.categoryList c WHERE c.catValue= :catValue");
+                "SELECT p FROM Pictures p INNER JOIN p.categoryList c WHERE c.catValue= :catValue");
         query.setParameter("catValue", catValue);
-        List<String> results = query.getResultList();
+        List<Pictures> results = query.getResultList();
         return results;
     }
+
 }
