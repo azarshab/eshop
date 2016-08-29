@@ -8,22 +8,26 @@
 
 
         <p:outputLabel for="ax" value="نوع عکس برای نمایش " />
-        <p:selectOneMenu id="ax" value="#{picturesManagementController.selectedCategory}" effect="fold" editable="true">
+        <p:selectOneMenu id="ax" value="#{picturesManagementController.selectedCategoryId}" effect="fold" editable="true">
             <f:selectItem itemLabel="نوع عکس برای نمایش " itemValue="" noSelectionOption="true"/>
             <p:ajax listener="#{picturesManagementController.filterPicturesByCategory()}" update="cf"/>
-            <f:selectItems var="cat" value="#{categoryManagementController.categorys}" itemValue="#{cat.catValue}" itemLabel="#{cat.catName}"/>
+            <f:selectItems var="cat" value="#{categoryManagementController.categorys}" itemValue="#{cat.id}" itemLabel="#{cat.catName}"/>
         </p:selectOneMenu>
 
-        <p:contentFlow id="cf" value="#{picturesManagementController.uploadedUserImages}" var="image">
-            <p:graphicImage  value="#{image}" styleClass="content" />
+        <p:contentFlow id="cf" value="#{picturesManagementController.imagesAddress}" var="imageAddress">
+            <p:graphicImage value="#{picturesManagementController.image}" styleClass="content">
+                <f:param name="imagePath" value="#{imageAddress}" />
+            </p:graphicImage>
             <div class="caption">#{image}</div>
         </p:contentFlow>
 
-        <p:dataGrid var="img" value="#{picturesManagementController.uploadedUserImages}" columns="4" layout="grid"
+        <p:dataGrid var="imageAddress" value="#{picturesManagementController.imagesAddress}" columns="4" layout="grid"
                     rows="12" paginator="false" style="margin-top:20px">
             <p:panel style="text-align:center">
                 <h:panelGrid columns="1" style="width:100%">
-                    <p:graphicImage  width="200" value="#{img}" styleClass="content" />
+                    <p:graphicImage width="200" value="#{picturesManagementController.image}" styleClass="content">
+                        <f:param name="imagePath" value="#{imageAddress}" />
+                    </p:graphicImage>
                     <h:outputText value="Aks" />
                 </h:panelGrid>
             </p:panel>

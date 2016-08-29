@@ -21,6 +21,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -45,9 +46,9 @@ public class PicturesManagementController implements Serializable {
     private List<String> selectedCategoryIdsList;
     private UploaderBB uploaderBB = new UploaderBB();
 
-    private Category selectedCategory;
+    private Integer selectedCategoryId;
     private List<Category> categorys;
-    private List<StreamedContent> uploadedUserImages;
+    private List<String> imagesAddress;
 
     public PicturesManagementController() {
     }
@@ -55,9 +56,9 @@ public class PicturesManagementController implements Serializable {
     @PostConstruct
     public void initPicture() {
         categorys = ejbFacadeCategory.findAll();
-        uploadedUserImages = new ArrayList<>();
+        imagesAddress = new ArrayList<>();
         if (!categorys.isEmpty()) {
-            selectedCategory = categorys.get(2);
+            selectedCategoryId = categorys.get(2).getId();
             filterPicturesByCategory();
         }
     }
@@ -136,20 +137,20 @@ public class PicturesManagementController implements Serializable {
         this.selectedCategoryIdsList = selectedCategoryIdsList;
     }
 
-    public Category getSelectedCategory() {
-        return selectedCategory;
+    public Integer getSelectedCategoryId() {
+        return selectedCategoryId;
     }
 
-    public void setSelectedCategory(Category selectedCategory) {
-        this.selectedCategory = selectedCategory;
+    public void setSelectedCategoryId(Integer selectedCategoryId) {
+        this.selectedCategoryId = selectedCategoryId;
     }
 
-    public List<StreamedContent> getUploadedUserImages() {
-        return uploadedUserImages;
+    public List<String> getImagesAddress() {
+        return imagesAddress;
     }
 
-    public void setUploadedUserImages(List<StreamedContent> uploadedUserImages) {
-        this.uploadedUserImages = uploadedUserImages;
+    public void setImagesAddress(List<String> imagesAddress) {
+        this.imagesAddress = imagesAddress;
     }
 
     public String addPictures() {
@@ -183,22 +184,23 @@ public class PicturesManagementController implements Serializable {
     }
 
     public void filterPicturesByCategory() {
-        uploadedUserImages.clear();
+        imagesAddress.clear();
         List<Pictures> pictures = getFacade().getPicturesByCatValue(2);
         for (int i = 0; i < pictures.size(); i++) {
-            FileInputStream input = null;
-            try {
-                input = new FileInputStream(new File(pictures.get(i).getRelativePath()));
-                uploadedUserImages.add(new DefaultStreamedContent(input, "image/jpeg"));
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(PicturesManagementController.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-            } finally {
-                try {
-                    input.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(PicturesManagementController.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-                }
-            }
+            imagesAddress.add(pictures.get(i).getRelativePath());
+        }
+    }
+
+    public StreamedContent getImage() throws IOException {
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+            // So, we're rendering the view. Return a stub StreamedContent so that it will generate right URL.
+            return new DefaultStreamedContent();
+        } else {
+            // So, browser is requesting the image. Return a real StreamedContent with the image bytes.
+            String imagePath = context.getExternalContext().getRequestParameterMap().get("imagePath");
+            return new DefaultStreamedContent(new FileInputStream(new File(imagePath)), "image/jpeg");
         }
     }
 
