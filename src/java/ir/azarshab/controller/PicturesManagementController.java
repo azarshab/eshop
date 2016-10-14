@@ -41,9 +41,9 @@ public class PicturesManagementController implements Serializable {
     private BigInteger photoDate;
     private String absolutePath;
     private List<String> selectedCategoryIdsList;
-    private UploaderBB uploaderBB = new UploaderBB();
+    private final UploaderBB uploaderBB = new UploaderBB();
 
-    private Integer selectedCategoryId;
+    private String selectedCategoryId;
     private List<Category> categorys;
     private List<String> imagesAddress;
 
@@ -55,8 +55,10 @@ public class PicturesManagementController implements Serializable {
         categorys = ejbFacadeCategory.findAll();
         imagesAddress = new ArrayList<>();
         if (!categorys.isEmpty()) {
-            selectedCategoryId = categorys.get(2).getId();
+            selectedCategoryId = categorys.get(0).getId().toString();
             filterPicturesByCategory();
+        } else {
+            showAllPictures();
         }
     }
 
@@ -134,11 +136,11 @@ public class PicturesManagementController implements Serializable {
         this.selectedCategoryIdsList = selectedCategoryIdsList;
     }
 
-    public Integer getSelectedCategoryId() {
+    public String getSelectedCategoryId() {
         return selectedCategoryId;
     }
 
-    public void setSelectedCategoryId(Integer selectedCategoryId) {
+    public void setSelectedCategoryId(String selectedCategoryId) {
         this.selectedCategoryId = selectedCategoryId;
     }
 
@@ -182,7 +184,15 @@ public class PicturesManagementController implements Serializable {
 
     public void filterPicturesByCategory() {
         imagesAddress.clear();
-        List<Pictures> pictures = getFacade().getPicturesByCatValue(2);
+        List<Pictures> pictures = getFacade().getPicturesByCatValue(Integer.parseInt(selectedCategoryId));
+        for (int i = 0; i < pictures.size(); i++) {
+            imagesAddress.add(pictures.get(i).getRelativePath());
+        }
+    }
+
+    public void showAllPictures() {
+        imagesAddress.clear();
+        List<Pictures> pictures = getFacade().findAll();
         for (int i = 0; i < pictures.size(); i++) {
             imagesAddress.add(pictures.get(i).getRelativePath());
         }

@@ -10,10 +10,11 @@
 
             <p:outputLabel for="ax" value="نوع عکس برای نمایش " />
             <p:selectOneMenu id="ax" value="#{picturesManagementController.selectedCategoryId}" effect="fold" editable="true">
+                <p:ajax listener="#{picturesManagementController.filterPicturesByCategory()}" update="cf sd"/>
                 <f:selectItem itemLabel="نوع عکس برای نمایش " itemValue="" noSelectionOption="true"/>
-                <p:ajax listener="#{picturesManagementController.filterPicturesByCategory()}" update="cf"/>
-                <f:selectItems var="cat" value="#{categoryManagementController.categorys}" itemValue="#{cat.id}" itemLabel="#{cat.catName}"/>
+                <f:selectItems var="cat" value="#{categoryManagementController.categorys}" itemDescription="#{cat.catName}" itemValue="#{cat.catName}" itemLabel="#{cat.id}"/>
             </p:selectOneMenu>
+
 
             <p:contentFlow id="cf" value="#{picturesManagementController.imagesAddress}" var="imageAddress">
                 <p:graphicImage value="#{picturesManagementController.image}" styleClass="content">
@@ -22,7 +23,7 @@
                 <div class="caption">#{image}</div>
             </p:contentFlow>
 
-            <p:dataGrid var="imageAddress" value="#{picturesManagementController.imagesAddress}" columns="4" layout="grid"
+            <p:dataGrid id="sd" var="imageAddress" value="#{picturesManagementController.imagesAddress}" columns="4" layout="grid"
                         rows="12" paginator="false" style="margin-top:20px">
                 <p:panel style="text-align:center">
                     <h:panelGrid columns="1" style="width:100%">
