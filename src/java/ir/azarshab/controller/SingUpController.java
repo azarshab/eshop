@@ -225,8 +225,11 @@ public class SingUpController implements Serializable {
     public void onRowEditUser(RowEditEvent event) {
         User user = (User) event.getObject();
         ejbFacade.edit(user);
-        users.remove(user);
-        users.add(user);
+        // FIXME: may be need later
+        if (false) {
+            users.remove(user);
+            users.add(user);
+        }
         FacesMessage msg = new FacesMessage("ویرایش", "اطلاعات با موفقیت ویرایش شد.");
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }

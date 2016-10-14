@@ -4,36 +4,37 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui" template="/templates/default/main.xhtml">
     <ui:define name="content">    
-        <h1 class="page-header "> <i class="fa fa-tachometer"></i>صفحه اصلی</h1>
+        <h:form id="indexPageForm">
+            <h1 class="page-header "> <i class="fa fa-tachometer"></i>صفحه اصلی</h1>
 
 
-        <p:outputLabel for="ax" value="نوع عکس برای نمایش " />
-        <p:selectOneMenu id="ax" value="#{picturesManagementController.selectedCategoryId}" effect="fold" editable="true">
-            <f:selectItem itemLabel="نوع عکس برای نمایش " itemValue="" noSelectionOption="true"/>
-            <p:ajax listener="#{picturesManagementController.filterPicturesByCategory()}" update="cf"/>
-            <f:selectItems var="cat" value="#{categoryManagementController.categorys}" itemValue="#{cat.id}" itemLabel="#{cat.catName}"/>
-        </p:selectOneMenu>
+            <p:outputLabel for="ax" value="نوع عکس برای نمایش " />
+            <p:selectOneMenu id="ax" value="#{picturesManagementController.selectedCategoryId}" effect="fold" editable="true">
+                <f:selectItem itemLabel="نوع عکس برای نمایش " itemValue="" noSelectionOption="true"/>
+                <p:ajax listener="#{picturesManagementController.filterPicturesByCategory()}" update="cf"/>
+                <f:selectItems var="cat" value="#{categoryManagementController.categorys}" itemValue="#{cat.id}" itemLabel="#{cat.catName}"/>
+            </p:selectOneMenu>
 
-        <p:contentFlow id="cf" value="#{picturesManagementController.imagesAddress}" var="imageAddress">
-            <p:graphicImage value="#{picturesManagementController.image}" styleClass="content">
-                <f:param name="imagePath" value="#{imageAddress}" />
-            </p:graphicImage>
-            <div class="caption">#{image}</div>
-        </p:contentFlow>
+            <p:contentFlow id="cf" value="#{picturesManagementController.imagesAddress}" var="imageAddress">
+                <p:graphicImage value="#{picturesManagementController.image}" styleClass="content">
+                    <f:param name="imagePath" value="#{imageAddress}" />
+                </p:graphicImage>
+                <div class="caption">#{image}</div>
+            </p:contentFlow>
 
-        <p:dataGrid var="imageAddress" value="#{picturesManagementController.imagesAddress}" columns="4" layout="grid"
-                    rows="12" paginator="false" style="margin-top:20px">
-            <p:panel style="text-align:center">
-                <h:panelGrid columns="1" style="width:100%">
-                    <p:graphicImage width="200" value="#{picturesManagementController.image}" styleClass="content">
-                        <f:param name="imagePath" value="#{imageAddress}" />
-                    </p:graphicImage>
-                    <h:outputText value="Aks" />
-                </h:panelGrid>
-            </p:panel>
-        </p:dataGrid>
+            <p:dataGrid var="imageAddress" value="#{picturesManagementController.imagesAddress}" columns="4" layout="grid"
+                        rows="12" paginator="false" style="margin-top:20px">
+                <p:panel style="text-align:center">
+                    <h:panelGrid columns="1" style="width:100%">
+                        <p:graphicImage width="200" value="#{picturesManagementController.image}" styleClass="content">
+                            <f:param name="imagePath" value="#{imageAddress}" />
+                        </p:graphicImage>
+                        <h:outputText value="Aks" />
+                    </h:panelGrid>
+                </p:panel>
+            </p:dataGrid>
 
-
+        </h:form>
 
     </ui:define>
 </ui:composition>       
