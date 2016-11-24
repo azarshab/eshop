@@ -176,8 +176,8 @@ public class PicturesManagementController implements Serializable {
     }
 
     public void handleFileUpload(FileUploadEvent event) {
-        uploaderBB.handleFileUpload(event);
-        absolutePath = UploaderBB.PREFIX_PATH + File.separator + event.getFile().getFileName();
+        String fileName = uploaderBB.handleFileUpload(event);
+        absolutePath = UploaderBB.PREFIX_PATH + File.separator + fileName;
         FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
