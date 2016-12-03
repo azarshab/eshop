@@ -4,7 +4,7 @@
                 xmlns:p="http://primefaces.org/ui" >
 
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
+        <div class="container-fluid site-header-bg-color">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -12,27 +12,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">برترین عکس ها</a>
+                <a class="navbar-brand headr-font-class" style="color: #fff;" href="#">برترین عکس ها</a>
             </div>
             <div class="navbar-collapse collapse">
-                <!--                <ul class="nav navbar-nav navbar-right">
-                                    <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">Settings</a></li>
-                                    <li><a href="#">Profile</a></li>
-                                    <li><a href="#">Help</a></li>
-                                </ul>-->
-
                 <ul class="nav navbar-nav navbar-right">
-                    <li><h:link outcome="login" id="login" rendered="#{!loginController.hasUserLogin()}" value="ورود"/> </li>
+                    <li><h:link outcome="login" style="color: #fff;" id="login" rendered="#{!loginController.hasUserLogin()}" value="ورود"/> </li>
                     <li>
-                        <h:form class="navbar-form navbar-right">
-                            <h:commandLink style="font-family: tahoma;" rendered="#{loginController.hasUserLogin()}" action="#{singUpController.logout()}" value="خروج"/>
+                        <h:form class="navbar-form navbar-right" style="margin-top: 16px;">
+                            <h:commandLink style="font-family: tahoma;color: #fff;" rendered="#{loginController.hasUserLogin()}" action="#{singUpController.logout()}" value="خروج"/>
                         </h:form>
                     </li>
-                    <li><h:link outcome="singUp" id="signup"  rendered="#{!loginController.hasUserLogin()}" value="ثبت نام"/> </li>
-                    <li><h:link outcome="editUser" id="editUserId"  rendered="#{loginController.hasUserLogin()}" value="#{loginController.username}"/> </li>
-                    <li><h:outputText class="navbar-form navbar-right" style="font-family: tahoma;" value="خوش آمدید" rendered="#{loginController.hasUserLogin()}" /></li>
-                    <li><h:link outcome="index" id="index" value="صفحه اصلی"/></li>
+                    <li><h:link outcome="singUp" id="signup" style="color: #fff;"  rendered="#{!loginController.hasUserLogin()}" value="ثبت نام"/> </li>
+                    <li><h:link outcome="editUser" id="editUserId" style="color: #fff;text-align: center;"  rendered="#{loginController.hasUserLogin()}" value="#{loginController.username}"/> </li>
+                    <li><h:outputText class="navbar-form navbar-right" style="font-family: tahoma;color: #fff;margin-top: 16px;" value="خوش آمدید" rendered="#{loginController.hasUserLogin()}" /></li>
+                    <li><h:link outcome="index" id="index" style="color: #fff;" value="صفحه اصلی"/></li>
                 </ul>
 
                 <h:form class="navbar-form navbar-right">

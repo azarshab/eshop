@@ -10,7 +10,8 @@
                 <f:event listener="#{picturesManagementController.initPicture()}" type="preRenderView"/>
             </f:metadata>
 
-            <h1 class="page-header "> <i class="fa fa-tachometer"></i>ثبت نام</h1>
+            <h1 class="headr-font-class "> ثبت نام</h1>
+            <hr />
             <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
                 <p:outputLabel  value="نام    " for="name" />
                 <p:inputText  id="name" value="#{picturesManagementController.name}" required="true"  requiredMessage="عنوان عکس  را وارد کنید"/>

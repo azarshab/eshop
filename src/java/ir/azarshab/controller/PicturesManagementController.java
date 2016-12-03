@@ -183,6 +183,7 @@ public class PicturesManagementController implements Serializable {
     }
 
     public void filterPicturesByCategory() {
+        System.out.println("---------------------------------------------------"+selectedCategoryId);
         imagesAddress.clear();
         List<Pictures> pictures = getFacade().getPicturesByCatValue(Integer.parseInt(selectedCategoryId));
         for (int i = 0; i < pictures.size(); i++) {

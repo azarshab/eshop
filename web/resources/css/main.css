@@ -8,39 +8,18 @@
     font-family: tahoma;
 }
 
-body{
-    background-color: #eeeff1;
-}
-a{
-    text-decoration: none;
-    color: blue;
-}
-.header{
-    background-color: #fff;
+.label-font-class{
+    font-size: 13px;
+    font-family: tahoma;
+    font-weight: normal;
 }
 
-.ui-menubar{       
-    float: right !important;           
-    margin-left: 0px !important;        
-}
-.ui-menu-list {
-    right: 0;
-}
-.ui-menuitem-text {
-    float: right !important;
+.headr-font-class{
+    font-size: 18px;
+    font-family: tahoma;
 }
 
-.ui-menu-child{
-    left: -60px; width: 8.5em;
-}
-
-.footer{
-    background-color: #fff;
-    text-align: center;
-}
-
-.top-bar{
-    text-align: center;
-    background-color: #fff;
-    margin-top: 8px;
+.site-header-bg-color{
+    background-color: green;
+    color: #fff;
 }
