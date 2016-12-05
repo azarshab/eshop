@@ -8,11 +8,11 @@
             <h1 class="headr-font-class "> مدیریت محتوا</h1>
             <hr />
             <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
-                <p:outputLabel  value="عنوان    " for="title" />
+                <p:outputLabel  value="عنوان    " for="title" class="label-font-class"/>
                 <p:inputText  id="title" value="#{siteContentManagementController.title}" required="true"  requiredMessage="عنوان  را وارد کنید"/>
-                <p:outputLabel  value="تاریخ درج متن   " for="creationDate" />
+                <p:outputLabel  value="تاریخ درج متن   " for="creationDate" class="label-font-class" />
                 <p:inputText  id="creationDate"  value="#{siteContentManagementController.creationDate}" required="true" requiredMessage="تاریخ درج متن را وارد کنید"/>
-                <p:outputLabel  value="جای در صفحه   " for="visitCount" />
+                <p:outputLabel  value="جای در صفحه   " for="visitCount" class="label-font-class"/>
                 <p:inputText  id="visitCount" value="#{siteContentManagementController.visitCount}" required="true" requiredMessage="جای در صفحه را وارد کنید"/>
                 <h:form>           
                     <p:editor id="editor" widgetVar="editorWidget" value="#{siteContentManagementController.description}" width="600" />

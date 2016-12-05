@@ -7,15 +7,15 @@
         <h:form id="indexPageForm">
             <h1 class="headr-font-class "> صفحه اصلی</h1>
             <hr />
-            <p:outputLabel for="ax" value="نوع عکس برای نمایش " />
-            <h:selectOneMenu id="ax" value="#{picturesManagementController.selectedCategoryId}">
+            <p:outputLabel for="ax" value="نوع عکس برای نمایش " class="label-font-class" />
+            <h:selectOneMenu id="ax" value="#{picturesManagementController.selectedCategoryId}" class=".site-selectOneMenu-bg-color">
                 <p:ajax listener="#{picturesManagementController.filterPicturesByCategory()}" update="cf sd"/>
                 <f:selectItem itemLabel="نوع عکس برای نمایش " itemValue="" noSelectionOption="true"/>
                 <f:selectItems var="cat" value="#{categoryManagementController.categorys}" itemDescription="#{cat.catName}" itemValue="#{cat.catValue}" itemLabel="#{cat.catName}"/>
             </h:selectOneMenu>
 
 
-            <p:contentFlow id="cf" value="#{picturesManagementController.imagesAddress}" var="imageAddress">
+            <p:contentFlow id="cf" value="#{picturesManagementController.imagesAddress}" var="imageAddress" class="site-content-bg-color">
                 <p:graphicImage value="#{picturesManagementController.image}" styleClass="content">
                     <f:param name="imagePath" value="#{imageAddress}" />
                 </p:graphicImage>
@@ -23,10 +23,10 @@
             </p:contentFlow>
 
             <p:dataGrid id="sd" var="imageAddress" value="#{picturesManagementController.imagesAddress}" columns="4" layout="grid"
-                        rows="12" paginator="false" style="margin-top:20px">
-                <p:panel style="text-align:center">
-                    <h:panelGrid columns="1" style="width:100%">
-                        <p:graphicImage width="200" value="#{picturesManagementController.image}" styleClass="content">
+                        rows="12" paginator="false" style="margin-top:20px"   >
+                <p:panel style="text-align:center"  class="site-content-bg-color">
+                    <h:panelGrid columns="1" style="width:100%"  class="site-content-bg-color">
+                        <p:graphicImage width="200" value="#{picturesManagementController.image}" styleClass="content" >
                             <f:param name="imagePath" value="#{imageAddress}" />
                         </p:graphicImage>
                         <h:outputText value="Aks" />

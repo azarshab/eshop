@@ -15,17 +15,17 @@
                 <p:inputText  id="roleValue"   value="#{userRoleManagementController.roleValue}" required="true" requiredMessage="مقدار نقش کاربری را وارد کنید" />
 
                 <p:outputLabel  id="fakeLabel"  value=""/>
-                <p:commandButton id="roleButton"  action="#{userRoleManagementController.userRoleAdd()}" value="افزودن" update="messages roleTable"/>
+                <p:commandButton id="roleButton"   action="#{userRoleManagementController.userRoleAdd()}" value="افزودن"  update="messages roleTable"   />
             </p:panelGrid>
             <p:focus for="roleName" />
             <p:defaultCommand target="roleButton" /> 
 
 
-            <p:dataTable id="roleTable" var="role" selection="#{userRoleManagementController.selectedRole}" value="#{userRoleManagementController.roles}" editable="true" editMode="row" widgetVar="cellRoles">
+            <p:dataTable id="roleTable" var="role" selection="#{userRoleManagementController.selectedRole}" value="#{userRoleManagementController.roles}" editable="true" editMode="row" widgetVar="cellRoles" >
                 <p:ajax event="rowEdit" listener="#{userRoleManagementController.onRowEdit}" update="messages" />
                 <p:ajax event="rowEditCancel" listener="#{userRoleManagementController.onRowCancel}" update="messages" />
 
-                <p:column headerText="نام نقش">
+                <p:column headerText="نام نقش" class="label-font-class">
                     <p:cellEditor>
                         <f:facet name="output">
                             <h:outputText value="#{role.roleName}" style="width: 100%;" />
@@ -34,7 +34,7 @@
                     </p:cellEditor>
                 </p:column>
 
-                <p:column headerText="مقدار نقش">
+                <p:column headerText="مقدار نقش"  class="label-font-class">
                     <p:cellEditor>
                         <f:facet name="output">
                             <h:outputText style="width: 100%;" value="#{role.roleValue}"/>
@@ -43,11 +43,11 @@
                     </p:cellEditor>
                 </p:column>
 
-                <p:column style="width:50px;">
-                    <p:rowEditor/>
+                <p:column style="width:50px;"   >
+                    <p:rowEditor style="color: #fff"/>
                 </p:column>
-                <p:column style="width:50px;">
-                    <p:commandLink actionListener="#{userRoleManagementController.removeUserRole(role)}" value="حذف" update="messages roleTable"/>
+                <p:column style="width:50px;"  >
+                    <p:commandLink actionListener="#{userRoleManagementController.removeUserRole(role)}" value="حذف" update="messages roleTable" />
                 </p:column>
 
             </p:dataTable>

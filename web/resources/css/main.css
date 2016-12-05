@@ -6,20 +6,33 @@
 *{
     font-size: 13px;
     font-family: tahoma;
+   
 }
 
 .label-font-class{
     font-size: 13px;
-    font-family: tahoma;
+    font-family: BTraffic;
     font-weight: normal;
+    color: #264180;
 }
 
 .headr-font-class{
     font-size: 18px;
-    font-family: tahoma;
+    font-family: BRoya;
 }
 
 .site-header-bg-color{
-    background-color: green;
+    background-color: #304676;
     color: #fff;
 }
+.site-content-bg-color{
+    background-color: #ffedd1;
+    color: #264180;
+    border: #ffedd1 5px;
+    
+}
+.site-rightMenu-bg-color{
+    background-color: #141a2c;
+}
+
+

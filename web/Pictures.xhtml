@@ -3,7 +3,7 @@
                 xmlns:f="http://java.sun.com/jsf/core"  
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui" template="/templates/default/main.xhtml">
-    <ui:define name="content">   
+    <ui:define name="content" class="site-content-bg-color">   
         <h:form id="pictureForm">
 
             <f:metadata>                            
@@ -12,14 +12,14 @@
 
             <h1 class="headr-font-class "> ثبت نام</h1>
             <hr />
-            <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
-                <p:outputLabel  value="نام    " for="name" />
+            <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank ">
+                <p:outputLabel  value="نام    " for="name" class="label-font-class"/>
                 <p:inputText  id="name" value="#{picturesManagementController.name}" required="true"  requiredMessage="عنوان عکس  را وارد کنید"/>
-                <p:outputLabel  value="درباره عکس " for="title" />
+                <p:outputLabel  value="درباره عکس " for="title" class="label-font-class"/>
                 <p:inputText  id="title"  value="#{picturesManagementController.title}" required="true" requiredMessage="شرح مختصر عکس را وارد کنید"/>
-                <p:outputLabel  value="شرح کامل عکس   " for="description" />
+                <p:outputLabel  value="شرح کامل عکس   " for="description" class="label-font-class"/>
                 <p:inputText  id="description" value="#{picturesManagementController.description}" required="true" requiredMessage="شرح کامل را وارد کنید"/>
-                <p:outputLabel  value="زمان عکاسی   " for="photoDate" />
+                <p:outputLabel  value="زمان عکاسی   " for="photoDate" class="label-font-class"/>
                 <p:inputText  id="photoDate" value="#{picturesManagementController.photoDate}" required="true" requiredMessage="تاریخ عکاسی را وارد کنید"/>
 
 

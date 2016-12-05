@@ -8,10 +8,10 @@
             <h1 class="headr-font-class "> ورود</h1>
             <hr />
             <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank">
-                <p:outputLabel  value="نام کاربری" for="username" />
+                <p:outputLabel  value="نام کاربری" for="username" class="label-font-class"/>
                 <p:inputText  id="username" value="#{loginController.username}"/>
 
-                <p:outputLabel  value="رمز عبور" for="txtPassword" />
+                <p:outputLabel  value="رمز عبور" for="txtPassword" class="label-font-class" />
                 <p:inputText  id="txtPassword" type="password"  value="#{loginController.password}"/>
 
                 <p:outputLabel  id="fakeLabel"  value=""/>
